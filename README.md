@@ -13,3 +13,14 @@ BrikAuto est votre compagnon numérique ultime pour la gestion et l'entretien de
 Que vous soyez un passionné d'automobile ou simplement à la recherche d'une solution pratique pour maintenir votre véhicule en parfait état, BrikAuto est l'outil qu'il vous faut. Simplifiez votre expérience automobile dès aujourd'hui !
 
 🛠️ Développé avec Spring Boot et Angular pour une expérience utilisateur fluide et réactive.
+Voila la conception UML de projet : 
+<h3>Diagramme de cas d'utilisation :</h3>
+<img width="557" alt="image" src="https://github.com/user-attachments/assets/c5489872-8239-4903-8577-9fb91cef62ed">
+<h3>Diagramme de classe:</h3>
+<img width="554" alt="ClassDiagram" src="https://github.com/user-attachments/assets/acb7b7a5-e38e-49c3-aca3-64dc670d0781">
+
+<h3>Diagramme de séquence :</h3>
+<img width="533" alt="image" src="https://github.com/user-attachments/assets/688611d3-331b-4b48-b541-cc0efe5e2a09">
+
+
+
