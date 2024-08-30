@@ -19,8 +19,11 @@ Voila la conception UML de projet :
 <h3>Diagramme de classe:</h3>
 <img width="554" alt="ClassDiagram" src="https://github.com/user-attachments/assets/acb7b7a5-e38e-49c3-aca3-64dc670d0781">
 
-<h3>Diagramme de séquence :</h3>
+<h3>Diagramme de séquence d'ajout d'un équipement :</h3>
 <img width="533" alt="image" src="https://github.com/user-attachments/assets/688611d3-331b-4b48-b541-cc0efe5e2a09">
+<h3>Diagramme de séquence d'authentification :</h3>
+<img width="440" alt="image" src="https://github.com/user-attachments/assets/0c27eedd-9616-49bf-a0b2-c558670a725d">
+
 
 
 
