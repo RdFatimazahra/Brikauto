@@ -2,6 +2,7 @@ package com.backend.Controller;
 
 import com.backend.Model.Product;
 import com.backend.Service.ProductService;
+import com.backend.ServiceImpl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/products")
 public class ProductController {
     @Autowired
-    private ProductService productService;
+    private ProductServiceImpl productService;
 
     @GetMapping
     public List<Product> getAllProducts() {
