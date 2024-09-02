@@ -1,8 +1,8 @@
 package com.backend.Repository;
 
 import com.backend.Model.Categorie;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CategorieRepository extends CrudRepository<Categorie, Integer> {
+public interface CategorieRepository extends JpaRepository<Categorie, Integer> {
 
 }
