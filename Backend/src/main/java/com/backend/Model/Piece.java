@@ -17,10 +17,10 @@ import org.springframework.boot.autoconfigure.web.WebProperties;
 public class Piece {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String nom;
     private String reference;
     private Double prix;
-    private Integer quantiteEnStock;
+    private int quantiteEnStock;
     private String fournisseur;
 }
