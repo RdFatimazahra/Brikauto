@@ -21,10 +21,6 @@ import java.util.List;
 public class AuthenticationService {
     private final UserRepository userRepository;
 
-    private final UtilisateurRepository utilisateurRepository;
-
-    private final FournisseurRepository fournisseurRepository;
-
     private final PasswordEncoder passwordEncoder;
 
     private final JwtService jwtService;
@@ -55,7 +51,7 @@ public class AuthenticationService {
         fournisseur.setNom(request.getNom());
         fournisseur.setEmail(request.getEmail());
         fournisseur.setPassword(passwordEncoder.encode(request.getPassword()));
-    fournisseur.setRole(Role.FOURNISSEUR);
+        fournisseur.setRole(Role.FOURNISSEUR);
 
         userRepository.save(fournisseur);
         var jwtToken = jwtService.generateToken(fournisseur);
