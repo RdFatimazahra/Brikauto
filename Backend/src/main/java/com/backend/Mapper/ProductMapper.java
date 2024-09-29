@@ -2,7 +2,6 @@ package com.backend.Mapper;
 
 
 import com.backend.DTO.ProductDto;
-import com.backend.Model.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
