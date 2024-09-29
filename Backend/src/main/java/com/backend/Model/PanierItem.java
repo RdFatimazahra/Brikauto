@@ -9,17 +9,17 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderItem {
+public class PanierItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idOrderItem;
+    private Long idPanierItem;
 
     private Integer quantite;
-    private Double prixUnitaire;
 
     @ManyToOne
-    private Order order;
+    private Panier panier;
 
     @ManyToOne
     private Piece piece;
+
 }
