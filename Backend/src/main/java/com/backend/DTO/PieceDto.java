@@ -1,5 +1,6 @@
 package com.backend.DTO;
 
+import com.backend.Model.Fournisseur;
 import lombok.Data;
 
 @Data
@@ -9,6 +10,7 @@ public class PieceDto {
     private String reference;
     private Double prix;
     private int quantiteEnStock;
-    private String fournisseur;
+    private String image;
+    private Long fournisseurId;
 
 }

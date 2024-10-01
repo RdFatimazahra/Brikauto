@@ -18,6 +18,7 @@ public class Piece {
     private String reference;
     private Double prix;
     private int quantiteEnStock;
+    private String image;
 
     @ManyToOne
     @JoinColumn(name = "idFournisseur")

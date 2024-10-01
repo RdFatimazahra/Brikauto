@@ -5,7 +5,7 @@ import com.backend.Model.Piece;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface PieceMapper {
     PieceMapper INSTANCE = Mappers.getMapper(PieceMapper.class);
     PieceDto PieceToPieceDto(Piece piece);
