@@ -18,6 +18,7 @@ public class Vehicule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAuto;
     private String immatriculation;
+
     @Enumerated(EnumType.STRING)
     private Marque marque;
 

@@ -1,13 +1,13 @@
-package com.backend.Service;
-
-import com.backend.DTO.FournisseurDto;
-
-import java.util.List;
-
-public interface FournisseurService {
-    FournisseurDto createFournisseur(FournisseurDto fournisseurDTO);
-    FournisseurDto getFournisseurById(int id);
-    List<FournisseurDto> getAllFournisseurs();
-    FournisseurDto updateFournisseur(int id, FournisseurDto fournisseurDTO);
-    void deleteFournisseur(int id);
-}
+//package com.backend.Service;
+//
+//import com.backend.DTO.FournisseurDTO;
+//
+//import java.util.List;
+//
+//public interface FournisseurService {
+//    FournisseurDTO createFournisseur(FournisseurDTO fournisseurDTO);
+//    FournisseurDTO getFournisseurById(int id);
+//    List<FournisseurDTO> getAllFournisseurs();
+//    FournisseurDTO updateFournisseur(int id, FournisseurDTO fournisseurDTO);
+//    void deleteFournisseur(int id);
+//}

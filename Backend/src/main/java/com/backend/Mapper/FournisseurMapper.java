@@ -1,4 +1,14 @@
 package com.backend.Mapper;
 
-public class FournisseurMapper {
+import com.backend.DTO.FournisseurDTO;
+import com.backend.Model.Fournisseur;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+
+@Mapper(componentModel = "spring")
+public interface FournisseurMapper {
+
+    FournisseurDTO toFournisseurDTO(Fournisseur fournisseur);
+
+    Fournisseur toFournisseur(FournisseurDTO fournisseurDTO);
 }

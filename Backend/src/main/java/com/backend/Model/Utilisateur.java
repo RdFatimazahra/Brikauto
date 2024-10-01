@@ -11,7 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 public class Utilisateur extends Personne {
 
-
     @OneToMany(mappedBy = "utilisateur")
     private List<Order> commandes;
 

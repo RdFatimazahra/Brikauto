@@ -11,6 +11,5 @@ public class PieceDto {
     private Double prix;
     private int quantiteEnStock;
     private String image;
-    private Long fournisseurId;
 
 }
