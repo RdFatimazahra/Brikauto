@@ -17,7 +17,7 @@ Voila la conception UML de projet :
 <h3>Diagramme de cas d'utilisation :</h3>
 <img width="557" alt="image" src="https://github.com/user-attachments/assets/c5489872-8239-4903-8577-9fb91cef62ed">
 <h3>Diagramme de classe:</h3>
-<img width="554" alt="ClassDiagram" src="https://github.com/user-attachments/assets/acb7b7a5-e38e-49c3-aca3-64dc670d0781">
+<img width="690" alt="image" src="https://github.com/user-attachments/assets/67adcbd5-7600-4c48-a3af-22cf9b8760ea">
 
 <h3>Diagramme de séquence d'ajout d'un équipement :</h3>
 <img width="533" alt="image" src="https://github.com/user-attachments/assets/688611d3-331b-4b48-b541-cc0efe5e2a09">
