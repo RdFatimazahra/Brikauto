@@ -23,7 +23,7 @@ public class AuthenticationController {
     }
 
 
-    @PostMapping("/Admin/registerFournisseur")
+    @PostMapping("/registerFournisseur")
     public ResponseEntity<AuthenticationResponse>registerFournisseur(
             @RequestBody RegisterRequest request
     ) {

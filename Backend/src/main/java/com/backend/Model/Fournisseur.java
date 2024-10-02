@@ -14,6 +14,8 @@ import java.util.List;
 @NoArgsConstructor
 //@EqualsAndHashCode(callSuper = true)
 public class Fournisseur extends Personne {
+
+
     @OneToMany(mappedBy = "fournisseur", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Piece> pieces; // Un fournisseur peut fournir plusieurs pièces
 
