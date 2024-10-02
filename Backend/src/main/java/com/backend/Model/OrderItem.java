@@ -18,7 +18,7 @@ public class OrderItem {
     private Double prixUnitaire;
 
     @ManyToOne
-    private Order order;
+    private Commande commande;
 
     @ManyToOne
     private Piece piece;

@@ -1,13 +1,13 @@
-//package com.backend.Service;
-//
-//import com.backend.DTO.PieceDto;
-//
-//import java.util.List;
-//
-//public interface PieceService {
-//    PieceDto createPiece(PieceDto pieceDto);
-//    PieceDto getPieceById(int id);
-//    List<PieceDto> getAllPieces();
-//    PieceDto updatePiece(int id, PieceDto pieceDto);
-//    void deletePiece(int id);
-//}
+package com.backend.Service;
+
+import com.backend.DTO.PieceDto;
+
+import java.util.List;
+
+public interface PieceService {
+    List<PieceDto> getAllPieces();
+    PieceDto getPieceById(int id);
+    PieceDto createPiece(PieceDto pieceDTO);
+    PieceDto updatePiece(int id, PieceDto pieceDTO);
+    void deletePiece(int id);
+}

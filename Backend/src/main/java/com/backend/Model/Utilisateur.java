@@ -12,7 +12,7 @@ import java.util.List;
 public class Utilisateur extends Personne {
 
     @OneToMany(mappedBy = "utilisateur")
-    private List<Order> commandes;
+    private List<Commande> commandes;
 
     @OneToOne(mappedBy = "utilisateur")
     private Panier panier;

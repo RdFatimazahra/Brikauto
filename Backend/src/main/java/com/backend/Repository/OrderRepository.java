@@ -1,7 +1,13 @@
 package com.backend.Repository;
 
-import com.backend.Model.Order;
+import com.backend.Model.Commande;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface OrderRepository extends JpaRepository<Order, Long> {
+import java.util.Optional;
+
+@Repository
+public interface OrderRepository extends JpaRepository<Commande, Long> {
+
+    Optional<Commande> findById(Long id);
 }
