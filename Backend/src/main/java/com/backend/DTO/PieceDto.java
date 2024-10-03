@@ -10,7 +10,7 @@ public class PieceDto {
     private String reference;
     private Double prix;
     private int quantite;
-    private int idFournisseur;
     private String image;
+    private int fournisseurId;
 
 }

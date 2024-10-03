@@ -2,7 +2,9 @@ package com.backend.ServiceImpl;
 
 import com.backend.DTO.PieceDto;
 import com.backend.Mapper.PieceMapper;
+import com.backend.Model.Fournisseur;
 import com.backend.Model.Piece;
+import com.backend.Repository.FournisseurRepository;
 import com.backend.Repository.PieceRepository;
 import com.backend.Service.PieceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +19,13 @@ public class PieceServiceImpl implements PieceService {
     private PieceRepository pieceRepository;
 
     @Autowired
+    private FournisseurRepository fournisseurRepository;
+
+    @Autowired
     private PieceMapper pieceMapper;
 
     @Override
-    public List<PieceDto> getAllPieces() {
+    public List<PieceDto> getAllPieces(Fournisseur fournisseur) {
         List<Piece> pieces = pieceRepository.findAll();
         return pieces.stream()
                 .map(pieceMapper::toPieceDTO)
@@ -35,10 +40,13 @@ public class PieceServiceImpl implements PieceService {
     }
 
     @Override
-    public PieceDto createPiece(PieceDto pieceDTO) {
+    public PieceDto createPiece(PieceDto pieceDTO, Fournisseur fournisseur) {
         Piece piece = pieceMapper.toPiece(pieceDTO);
-        pieceRepository.save(piece);
-        return pieceMapper.toPieceDTO(piece);
+        piece.setFournisseur(fournisseur);
+        Piece savedPiece = pieceRepository.save(piece);
+        PieceDto savedPieceDto = pieceMapper.toPieceDTO(savedPiece);
+        savedPieceDto.setFournisseurId(fournisseur.getId());  // Ensure fournisseurId is set in DTO
+        return savedPieceDto;
     }
 
     @Override

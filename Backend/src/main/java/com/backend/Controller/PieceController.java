@@ -48,10 +48,13 @@
 package com.backend.Controller;
 
 import com.backend.DTO.PieceDto;
+import com.backend.Model.Fournisseur;
+import com.backend.Repository.FournisseurRepository;
 import com.backend.Service.PieceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -63,9 +66,14 @@ public class PieceController {
     @Autowired
     private PieceService pieceService;
 
+    @Autowired
+    private FournisseurRepository fournisseurRepository;
+
     @PostMapping("/add")
-    public ResponseEntity<PieceDto> createPiece(@RequestBody PieceDto pieceDTO) {
-        return new ResponseEntity<>(pieceService.createPiece(pieceDTO), HttpStatus.CREATED);
+    public ResponseEntity<PieceDto> createPiece(@RequestBody PieceDto pieceDTO, @AuthenticationPrincipal Fournisseur fournisseur) {
+        Fournisseur fournisseur1 = fournisseurRepository.findById(fournisseur.getId()).get();
+        PieceDto pieceDto = pieceService.createPiece(pieceDTO, fournisseur1);
+      return  ResponseEntity.ok(pieceDto);
     }
 
     @GetMapping("/{id}")
@@ -74,8 +82,8 @@ public class PieceController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PieceDto>> getAllPieces() {
-        return new ResponseEntity<>(pieceService.getAllPieces(), HttpStatus.OK);
+    public ResponseEntity<List<PieceDto>> getAllPieces(@AuthenticationPrincipal Fournisseur fournisseur) {
+        return new ResponseEntity<>(pieceService.getAllPieces(fournisseur), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

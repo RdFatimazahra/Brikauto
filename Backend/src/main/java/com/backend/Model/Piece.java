@@ -21,7 +21,6 @@ public class Piece {
     private String image;
 
     @ManyToOne
-    @JoinColumn(name = "idFournisseur")
     private Fournisseur fournisseur;
 
 

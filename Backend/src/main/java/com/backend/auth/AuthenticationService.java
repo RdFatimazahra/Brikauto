@@ -30,10 +30,12 @@ public class AuthenticationService {
     //RegisterUser :
     public AuthenticationResponse register(RegisterRequest request) {
         var user = new Utilisateur();
+
         user.setNom(request.getNom());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(Role.USER);
+
 
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
@@ -49,6 +51,7 @@ public class AuthenticationService {
     public AuthenticationResponse registerFournisseur(RegisterRequest request) {
         var fournisseur = new Fournisseur();
         fournisseur.setNom(request.getNom());
+        fournisseur.setId(request.getId());
         fournisseur.setEmail(request.getEmail());
         fournisseur.setPassword(passwordEncoder.encode(request.getPassword()));
         fournisseur.setRole(Role.FOURNISSEUR);
@@ -95,6 +98,7 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .role(user.getRole().name())
+                .id(user.getId())
                 .build();
 
 
