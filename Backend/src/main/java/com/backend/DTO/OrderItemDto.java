@@ -7,5 +7,5 @@ public class OrderItemDto {
     private Long idOrderItem;
     private Integer quantite;
     private Double prixUnitaire;
-    private PieceDto piece;
+    private int idPiece;
 }

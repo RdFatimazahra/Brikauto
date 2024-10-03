@@ -1,6 +1,7 @@
 package com.backend.ServiceImpl;
 
-import com.backend.DTO.OrderDto;
+import com.backend.DTO.CommandeDto;
+import com.backend.DTO.OrderItemDto;
 import com.backend.Model.Commande;
 import com.backend.Model.OrderItem;
 import com.backend.Model.Piece;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CommandeServiceImpl implements CommandeService {
@@ -23,40 +26,46 @@ public class CommandeServiceImpl implements CommandeService {
     @Autowired
     private PieceRepository pieceRepository;
 
+
     @Override
     @Transactional
-    public OrderDto createCommande(OrderDto commandeDto, Utilisateur utilisateur) {
+    public CommandeDto createCommande(CommandeDto commandeDto, Utilisateur utilisateur) {
         Commande commande = new Commande();
         commande.setDateCommande(new Date());
         commande.setStatut("En attente");
         commande.setUtilisateur(utilisateur);
 
         double total = 0;
-        for (OrderItem item : commandeDto.getItems()) {
-            Piece piece = pieceRepository.findById(item.getPiece().getId())
+        for (OrderItemDto itemDto : commandeDto.getItems()) {
+            Piece piece = pieceRepository.findById(itemDto.getIdPiece())
                     .orElseThrow(() -> new RuntimeException("Piece not found"));
 
-            if (piece.getQuantite() < item.getQuantite()) {
+            if (piece.getQuantite() < itemDto.getQuantite()) {
                 throw new RuntimeException("Insufficient quantity for piece: " + piece.getNom());
             }
 
-            item.setPrixUnitaire(piece.getPrix());
-            item.setCommande(commande);
-            total += item.getPrixUnitaire() * item.getQuantite();
+            OrderItem orderItem = new OrderItem();
+            orderItem.setPiece(piece);
+            orderItem.setQuantite(piece.getQuantite());
+            orderItem.setPrixUnitaire(piece.getPrix());
+            orderItem.setCommande(commande);
 
-            piece.setQuantite(piece.getQuantite() - item.getQuantite());
+            total += orderItem.getPrixUnitaire() * orderItem.getQuantite();
+
+            piece.setQuantite(piece.getQuantite() - itemDto.getQuantite());
             pieceRepository.save(piece);
+
+            commande.getItems().add(orderItem);
         }
 
         commande.setTotal(total);
-        commande.setItems(commandeDto.getItems());
 
         Commande savedCommande = commandeRepository.save(commande);
         return convertToDto(savedCommande);
     }
 
     @Override
-    public OrderDto getCommandeById(Long id, Utilisateur utilisateur) {
+    public CommandeDto getCommandeById(Long id, Utilisateur utilisateur) {
         Commande commande = commandeRepository.findByIdOrderAndUtilisateur(id, utilisateur)
                 .orElseThrow(() -> new RuntimeException("Commande not found"));
         return convertToDto(commande);
@@ -98,8 +107,21 @@ public class CommandeServiceImpl implements CommandeService {
         dto.setDateCommande(commande.getDateCommande());
         dto.setStatut(commande.getStatut());
         dto.setTotal(commande.getTotal());
-        dto.setItems(commande.getItems());
+
+        List<OrderItemDto> itemDtos = commande.getItems().stream()
+                .map(this::convertToOrderItemDto)
+                .collect(Collectors.toList());
+
+        dto.setItems(itemDtos);
+        return dto;
+    }
+
+    private OrderItemDto convertToOrderItemDto(OrderItem orderItem) {
+        OrderItemDto dto = new OrderItemDto();
+        dto.setIdPiece(orderItem.getPiece().getId());
+        dto.setQuantite(orderItem.getQuantite());
+        dto.setPrixUnitaire(orderItem.getPrixUnitaire());
         return dto;
     }
 }
-}
+

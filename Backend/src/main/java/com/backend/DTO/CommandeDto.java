@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Mapper(componentModel = "spring")
-public class OrderDto {
+public class CommandeDto {
     private Long idOrder;
     private Date dateCommande;
     private String statut;

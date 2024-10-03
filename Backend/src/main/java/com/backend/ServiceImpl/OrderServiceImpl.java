@@ -1,6 +1,6 @@
 package com.backend.ServiceImpl;
 
-import com.backend.DTO.OrderDto;
+import com.backend.DTO.CommandeDto;
 import com.backend.Mapper.OrderMapper;
 import com.backend.Model.Commande;
 import com.backend.Repository.OrderRepository;
@@ -20,7 +20,7 @@ public class OrderServiceImpl implements OrderService {
     private OrderMapper orderMapper;
 
     @Override
-    public List<OrderDto> getAllOrders() {
+    public List<CommandeDto> getAllOrders() {
         List<Commande> commandes = orderRepository.findAll();
         return commandes.stream()
                 .map(orderMapper::toOrderDTO)
@@ -28,24 +28,24 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDto getOrderById(Long id) {
+    public CommandeDto getOrderById(Long id) {
         Commande commande = orderRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
         return orderMapper.toOrderDTO(commande);
     }
 
     @Override
-    public OrderDto createOrder(OrderDto orderDTO) {
-        Commande commande = orderMapper.toOrder(orderDTO);
+    public CommandeDto createOrder(CommandeDto commandeDTO) {
+        Commande commande = orderMapper.toOrder(commandeDTO);
         orderRepository.save(commande);
         return orderMapper.toOrderDTO(commande);
     }
 
     @Override
-    public OrderDto updateOrder(Long id, OrderDto orderDTO) {
+    public CommandeDto updateOrder(Long id, CommandeDto commandeDTO) {
         Commande commande = orderRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
-        orderMapper.toOrder(orderDTO); // Update fields
+        orderMapper.toOrder(commandeDTO); // Update fields
         orderRepository.save(commande);
         return orderMapper.toOrderDTO(commande);
     }
