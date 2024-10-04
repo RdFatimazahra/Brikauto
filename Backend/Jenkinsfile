@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven 'mvn'
+        maven 'maven_3_6_3'
     }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('filRouge')
@@ -17,7 +17,7 @@ pipeline {
         stage('Build & Test filRouge') {
             steps {
                 dir('Backend') {
-                    withMaven(maven: 'mvn') {
+                    withMaven(maven: 'maven_3_6_3') {
                         bat 'mvn clean install'
                     }
                 }
