@@ -1,0 +1,70 @@
+pipeline {
+    agent any
+    tools {
+        maven 'mvn'
+    }
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('filRouge')
+        SONAR_TOKEN = 'squ_2a555dcc67705df32a41dd1ad403f00121b04ca3'
+        SONARQUBE_SERVER = 'http://localhost:9000'
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/RdFatimazahra/Brikauto'
+            }
+        }
+        stage('Build & Test filRouge') {
+            steps {
+                dir('Backend') {
+                    withMaven(maven: 'mvn') {
+                        bat 'mvn clean install'
+                    }
+                }
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    def scannerHome = tool 'SonarQube'
+                    dir('Backend') {
+                        bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=Backend -Dsonar.sources=. -Dsonar.host.url=${SONARQUBE_SERVER} -Dsonar.login=${SONAR_TOKEN} -Dsonar.java.binaries=target/classes"
+                    }
+                }
+            }
+        }
+       stage('Build Docker Image & Push') {
+           steps {
+               dir('Backend') {
+                   script {
+                       try {
+                           bat 'docker context use default'
+
+                           withCredentials([usernamePassword(credentialsId: 'filrouge', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+                               bat "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                           }
+
+                           def imageTag = env.TAG_VERSION ?: 'latest'
+                           def dockerImage = docker.build("fatimazahra9/brikauto:${imageTag}")
+
+                           docker.withRegistry('https://index.docker.io/v1/', 'filrouge') {
+                               dockerImage.push()
+                           }
+                       } catch (Exception e) {
+                           error "Échec de la construction ou du push Docker : ${e.message}"
+                       }
+                   }
+               }
+           }
+       }
+
+       stage('Deploy with Docker Compose') {
+           steps {
+               dir('DreamCakes')  {
+                   bat 'docker-compose up -d'
+               }
+           }
+       }
+
+    }
+}

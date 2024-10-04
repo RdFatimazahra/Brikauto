@@ -9,9 +9,6 @@ import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface PieceMapper {
-    @Mapping(target = "fournisseurId", source = "fournisseur.id")
     PieceDto toPieceDTO(Piece piece);
-
-    @Mapping(target = "fournisseur.id", source = "fournisseurId")
     Piece toPiece(PieceDto pieceDTO);
 }

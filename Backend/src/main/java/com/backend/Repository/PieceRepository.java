@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface PieceRepository extends JpaRepository<Piece, Integer> {
 
-    List<Piece> findByFournisseurId(int fournisseurId);
-    Optional<Piece> findByIdAndFournisseurId(int id, int fournisseurId);
+//    List<Piece> findByFournisseurId(int fournisseurId);
+//    Optional<Piece> findByIdAndFournisseurId(int id, int fournisseurId);
 }

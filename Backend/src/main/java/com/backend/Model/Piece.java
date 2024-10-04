@@ -20,8 +20,5 @@ public class Piece {
     private int quantite;
     private String image;
 
-    @ManyToOne
-    private Fournisseur fournisseur;
-
 
 }
