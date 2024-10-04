@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CommandeRepository extends JpaRepository<Commande, Integer> {
-    Optional<Commande> findById(Long id);
+   // Optional<Commande> findById(Long id);
+   Optional<Commande> findByIdOrder(Long idOrder);
     Optional<Commande> findByIdOrderAndUtilisateur(Long id, Utilisateur utilisateur);
     List<Commande> findAllByUtilisateur(Utilisateur utilisateur);
 
