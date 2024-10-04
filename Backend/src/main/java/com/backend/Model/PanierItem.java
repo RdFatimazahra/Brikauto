@@ -22,4 +22,7 @@ public class PanierItem {
     @ManyToOne
     private Piece piece;
 
+    public Object getIdOrderItem() {
+        return idPanierItem;
+    }
 }

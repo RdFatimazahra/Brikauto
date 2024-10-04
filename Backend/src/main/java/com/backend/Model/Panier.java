@@ -23,4 +23,7 @@ public class Panier {
     @OneToMany(mappedBy = "panier", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PanierItem> items;
 
+
+    public void addItem(OrderItem newItem) {
+    }
 }

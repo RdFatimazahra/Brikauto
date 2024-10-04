@@ -2,6 +2,7 @@ package com.backend.ServiceImpl;
 
 import com.backend.DTO.PanierDto;
 import com.backend.Mapper.PanierMapper;
+import com.backend.Model.OrderItem;
 import com.backend.Model.Panier;
 import com.backend.Repository.PanierRepository;
 import com.backend.Service.PanierService;
@@ -27,6 +28,8 @@ public class PanierServiceImpl implements PanierService {
                 .map(panierMapper::toPanierDTO)
                 .collect(Collectors.toList());
     }
+
+
 
     @Override
     public PanierDto getPanierById(Long id) {
