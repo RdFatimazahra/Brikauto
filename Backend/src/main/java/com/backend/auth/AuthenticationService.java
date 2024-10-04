@@ -1,10 +1,9 @@
 package com.backend.auth;
 
 import com.backend.Model.Admin;
-import com.backend.Model.Fournisseur;
 import com.backend.Model.Role;
 import com.backend.Model.Utilisateur;
-import com.backend.Repository.FournisseurRepository;
+//import com.backend.Repository.FournisseurRepository;
 import com.backend.Repository.UserRepository;
 import com.backend.Repository.UtilisateurRepository;
 import com.backend.config.JwtService;
@@ -47,24 +46,6 @@ public class AuthenticationService {
 
     }
 
-    //registerFournisseur :
-    public AuthenticationResponse registerFournisseur(RegisterRequest request) {
-        var fournisseur = new Fournisseur();
-        fournisseur.setNom(request.getNom());
-        fournisseur.setId(request.getId());
-        fournisseur.setEmail(request.getEmail());
-        fournisseur.setPassword(passwordEncoder.encode(request.getPassword()));
-        fournisseur.setRole(Role.FOURNISSEUR);
-
-        userRepository.save(fournisseur);
-        var jwtToken = jwtService.generateToken(fournisseur);
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .role(fournisseur.getRole().name())
-                .build();
-
-
-    }
 
     //Register Admin ;
     public AuthenticationResponse registerAdmin(RegisterRequest request) {
@@ -104,13 +85,7 @@ public class AuthenticationService {
 
     }
 
-//    public List<Utilisateur> getAllUsers() {
-//        return  utilisateurRepository.findAll();
-//    }
-//
-//    public List<Fournisseur> getAllTechniciens() {
-//        return technicienRepository.findAll();
-//    }
+
 
 
 

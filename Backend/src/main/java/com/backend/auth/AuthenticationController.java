@@ -1,6 +1,5 @@
 package com.backend.auth;
 
-import com.backend.Model.Fournisseur;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,12 +22,12 @@ public class AuthenticationController {
     }
 
 
-    @PostMapping("/registerFournisseur")
-    public ResponseEntity<AuthenticationResponse>registerFournisseur(
-            @RequestBody RegisterRequest request
-    ) {
-        return ResponseEntity.ok(authenticationService.registerFournisseur(request));
-    }
+//    @PostMapping("/registerFournisseur")
+//    public ResponseEntity<AuthenticationResponse>registerFournisseur(
+//            @RequestBody RegisterRequest request
+//    ) {
+//        return ResponseEntity.ok(authenticationService.registerFournisseur(request));
+//    }
 
     @PostMapping("/registerAdmin")
     public ResponseEntity<AuthenticationResponse>registerAdmin(
