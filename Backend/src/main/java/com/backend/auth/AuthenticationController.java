@@ -21,14 +21,6 @@ public class AuthenticationController {
         return ResponseEntity.ok(authenticationService.register(request));
     }
 
-
-//    @PostMapping("/registerFournisseur")
-//    public ResponseEntity<AuthenticationResponse>registerFournisseur(
-//            @RequestBody RegisterRequest request
-//    ) {
-//        return ResponseEntity.ok(authenticationService.registerFournisseur(request));
-//    }
-
     @PostMapping("/registerAdmin")
     public ResponseEntity<AuthenticationResponse>registerAdmin(
             @RequestBody RegisterRequest request
