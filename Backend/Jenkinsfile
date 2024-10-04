@@ -4,7 +4,7 @@ pipeline {
         maven 'maven_3_6_3'
     }
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('filRouge')
+        DOCKERHUB_CREDENTIALS = credentials('filrouge')
         SONAR_TOKEN = 'squ_2a555dcc67705df32a41dd1ad403f00121b04ca3'
         SONARQUBE_SERVER = 'http://localhost:9000'
     }
