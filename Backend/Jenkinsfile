@@ -60,7 +60,7 @@ pipeline {
 
        stage('Deploy with Docker Compose') {
            steps {
-               dir('DreamCakes')  {
+               dir('Backend')  {
                    bat 'docker-compose up -d'
                }
            }

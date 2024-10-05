@@ -1,0 +1,38 @@
+<!-- <div class="container">
+    <h2>Ajouter une nouvelle pièce</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nom">Nom de la pièce</label>
+        <input type="text" id="nom" class="form-control" [(ngModel)]="piece.nom" name="nom" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Description de la pièce</label>
+        <input type="text" id="description" class="form-control" [(ngModel)]="piece.description" name="description" required>
+      </div>
+      <div class="form-group">
+        <label for="reference">Référence</label>
+        <input type="text" id="reference" class="form-control" [(ngModel)]="piece.reference" name="reference" required>
+      </div>
+      <div class="form-group">
+        <label for="quantite">Quantité</label>
+        <input type="number" id="quantite" class="form-control" [(ngModel)]="piece.quantite" name="quantite" required>
+      </div>
+      <button type="submit" class="btn btn-primary" >Ajouter</button>
+    </form>
+  </div> -->
+
+  <form [formGroup]="pieceForm" (ngSubmit)="onSubmit()">
+    <input formControlName="nom" type="text" placeholder="Nom">
+    <input formControlName="prix" type="number" placeholder="prix">
+    <input formControlName="idFournisseur" type="number" placeholder="idFournisseur">
+    <input formControlName="reference" type="text" placeholder="Référence">
+    <input formControlName="quantite" type="number" placeholder="quantite">
+  
+    <input type="file" (change)="onFileSelected($event, 'image')">
+  
+    <button type="submit">Submit</button>
+  
+    <!-- <img *ngIf="imagePreviewUrl" [src]="imagePreviewUrl" alt="Image Preview"> -->
+  </form>
+  
+  

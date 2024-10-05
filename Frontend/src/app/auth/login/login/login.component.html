@@ -1,0 +1,111 @@
+<!-- <section class="vh-100">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-7 text-black d-flex align-items-center justify-content-center">
+          <div class="d-flex align-items-center h-custom-2 px-3 mt-5">
+            <form style="width: 23rem;" [formGroup]="loginForm" (ngSubmit)="submitForm()">
+              <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
+              
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input 
+                  type="email" 
+                  id="form2Example18" 
+                  class="form-control form-control-lg" 
+                  formControlName="email"
+                />
+                <label class="form-label" for="form2Example18">Email address</label>
+              </div>
+              
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input 
+                  type="password" 
+                  id="form2Example28" 
+                  class="form-control form-control-lg" 
+                  formControlName="password"
+                />
+                <label class="form-label" for="form2Example28">Password</label>
+              </div>
+              
+              <div class="pt-1 mb-4 btn-center">
+                <button 
+                  data-mdb-button-init 
+                  data-mdb-ripple-init 
+                  class="btn btn-info btn-lg btn-block" 
+                  type="submit" 
+                  [disabled]="loginForm.invalid"
+                >
+                  Login
+                </button>
+              </div>
+  
+            </form>
+          </div>
+        </div>
+        
+        <div class="col-sm-5 d-flex align-items-center justify-content-center">
+          <img 
+            src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/277353723/original/0ad73a52b243805325fd0eceb4a511614425e553/give-you-high-quality-auto-parts-car-logo-with-original-concept.jpg"
+            alt="Login image" 
+            class="w-100 custom-image"
+          >
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <div class="container">
+    <div class="image-container" id="image-left">
+      <img src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/277353723/original/0ad73a52b243805325fd0eceb4a511614425e553/give-you-high-quality-auto-parts-car-logo-with-original-concept.jpg" alt="Image décorative" class="w-100 custom-image">
+    </div>
+    <div class="form-container">
+      <div id="login-form" class="form active">
+        <h2>Connexion</h2>
+        <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+          <div class="form-group">
+            <label for="login-email">Adresse email</label>
+            <input type="email" id="login-email" formControlName="email" placeholder="Adresse email">
+          </div>
+          <div class="form-group">
+            <label for="login-password">Mot de passe</label>
+            <input type="password" id="login-password" formControlName="password" placeholder="Mot de passe">
+          </div>
+          <div class="checkbox">
+            <input type="checkbox" id="remember-me">
+            <label for="remember-me">Se souvenir de moi</label>
+          </div>
+          <a href="#" class="forgot-password">Mot de passe oublié ?</a>
+          <button type="submit" class="submit-btn" [disabled]="loginForm.invalid">Se connecter</button>
+        </form>
+        <div class="switch-form">
+          <a href="#" id="switch-to-register">Nouveau membre ? Inscrivez-vous ici</a>
+        </div>
+      </div>
+  
+      <div id="register-form" class="form">
+        <h2>Inscription</h2>
+        <form [formGroup]="registerForm" (ngSubmit)="submitRegisterForm()">
+          <div class="form-group">
+            <label for="register-name">Nom</label>
+            <input type="text" id="register-name" formControlName="nom" placeholder="Nom">
+          </div>
+          <div class="form-group">
+            <label for="register-email">Email</label>
+            <input type="email" id="register-email" formControlName="email" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="register-password">Mot de passe</label>
+            <input type="password" id="register-password" formControlName="password" placeholder="Mot de passe">
+          </div>
+          <button type="submit" class="submit-btn" [disabled]="registerForm.invalid">S'inscrire</button>
+        </form>
+        <!-- ... -->
+      </div>
+        <div class="switch-form">
+          <a href="#" id="switch-to-login">Déjà un compte ? Connectez-vous ici</a>
+        </div>
+      </div>
+    </div>
+    <div class="image-container" id="image-right" style="display: none;">
+      <img src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/277353723/original/0ad73a52b243805325fd0eceb4a511614425e553/give-you-high-quality-auto-parts-car-logo-with-original-concept.jpg" alt="Image décorative" class="w-100 custom-image" alt="Image décorative" class="w-100 custom-image">
+    </div>
+  
