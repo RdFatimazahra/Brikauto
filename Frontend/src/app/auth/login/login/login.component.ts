@@ -111,7 +111,7 @@ export class LoginComponent implements OnInit {
             this.router.navigateByUrl('/dashboard');
             break;
           case 'USER':
-            this.router.navigateByUrl('/dashboard');
+            this.router.navigateByUrl('/show');
             break;
           // case 'FOURNISSEUR':
           //   this.router.navigateByUrl('/dashboard');

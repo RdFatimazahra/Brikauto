@@ -14,7 +14,7 @@ import java.util.List;
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
-    @PostMapping("/Admin/register")
+    @PostMapping("/registerUser")
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody RegisterRequest request
     ) {

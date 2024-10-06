@@ -1,10 +1,24 @@
 <nav class="navbar">
-    <div class="container">
-      <a href="/" class="logo">AutoParts</a>
-      <ul class="nav-list">
-        <li *ngFor="let item of navItems">
-          <a [href]="item.link" class="nav-link">{{ item.label }}</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <div class="container">
+    <a href="/" class="logo">AutoParts</a>
+    <ul class="nav-list">
+      <li *ngFor="let item of navItems">
+        <a [routerLink]="item.link" class="nav-link">{{ item.label }}</a>
+      </li>
+      <!-- Cart link with cart icon -->
+      <li class="cart-item">
+        <a [routerLink]="cartLink" class="nav-link">
+          <i class="fas fa-shopping-cart"></i> Cart 
+          <span *ngIf="cartItemCount > 0" class="cart-badge">{{ cartItemCount }}</span>
+        </a>
+      </li>
+      <!-- Wishlist link with wishlist icon -->
+      <li class="wishlist-item">
+        <a [routerLink]="wishlistLink" class="nav-link">
+          <i class="fas fa-heart"></i> Wishlist 
+          <span *ngIf="wishlistItemCount > 0" class="wishlist-badge">{{ wishlistItemCount }}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Piece } from '../interfaces/Piece';
 
@@ -13,41 +13,60 @@ export class ClientService {
 
   // Get all pieces
   getAllPieces(): Observable<Piece[]> {
-    return this.http.get<Piece[]>(`${this.apiUrl}/show`);
+    const headers = this.createAuthorizationHeader();
+    return this.http.get<Piece[]>(`${this.apiUrl}/show`, { headers });
   }
 
   // Add a piece to the wishlist
   addToWishlist(pieceId: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}/wishlist/add`, { pieceId });
+    const headers = this.createAuthorizationHeader();
+    return this.http.post(`${this.apiUrl}/wishlist/add`, { pieceId }, { headers });
   }
 
   // Remove a piece from the wishlist
   removeFromWishlist(pieceId: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/wishlist/remove/${pieceId}`);
+    const headers = this.createAuthorizationHeader();
+    return this.http.delete(`${this.apiUrl}/wishlist/remove/${pieceId}`, { headers });
   }
 
   // Get the user's wishlist
   getWishlist(): Observable<Piece[]> {
-    return this.http.get<Piece[]>(`${this.apiUrl}/wishlist`);
+    const headers = this.createAuthorizationHeader();
+    return this.http.get<Piece[]>(`${this.apiUrl}/wishlist`, { headers });
   }
 
   // Add a piece to the cart
   addToCart(pieceId: number, quantity: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}/cart/add`, { pieceId, quantity });
+    const headers = this.createAuthorizationHeader();
+    return this.http.post(`${this.apiUrl}/cart/add`, { pieceId, quantity }, { headers });
   }
 
   // Remove a piece from the cart
   removeFromCart(pieceId: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/cart/remove/${pieceId}`);
+    const headers = this.createAuthorizationHeader();
+    return this.http.delete(`${this.apiUrl}/cart/remove/${pieceId}`, { headers });
   }
 
   // Get the user's cart
   getCart(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/cart`);
+    const headers = this.createAuthorizationHeader();
+    return this.http.get(`${this.apiUrl}/cart`, { headers });
   }
 
   // Place an order
   placeOrder(orderData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/order`, orderData);
+    const headers = this.createAuthorizationHeader();
+    return this.http.post(`${this.apiUrl}/order`, orderData, { headers });
+  }
+
+  // Create the Authorization header with JWT
+  private createAuthorizationHeader(): HttpHeaders {
+    const jwtToken = localStorage.getItem('jwt'); // Assuming you store the JWT in localStorage
+    if (jwtToken) {
+      return new HttpHeaders().set("Authorization", "Bearer " + jwtToken);
+    } else {
+      console.error("JWT token not found in localStorage");
+      return new HttpHeaders();
+    }
   }
 }

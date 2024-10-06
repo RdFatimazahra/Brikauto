@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CartItem } from 'src/app/interfaces/CartItem';
 import { Piece } from 'src/app/interfaces/Piece';
 import { ClientService } from 'src/app/services/client.service';
-
 
 @Component({
   selector: 'app-show-piece',
@@ -10,14 +10,14 @@ import { ClientService } from 'src/app/services/client.service';
 })
 export class ShowPieceComponent implements OnInit {
   autoParts: Piece[] = [];
-  wishlist: number[] = [];
+  // wishlist: number[] = []; // Commented out wishlist
   cart: { [key: number]: number } = {};
 
   constructor(private clientService: ClientService) { }
 
   ngOnInit(): void {
     this.loadPieces();
-    this.loadWishlist();
+    // this.loadWishlist(); // Commented out wishlist loading
     this.loadCart();
   }
 
@@ -32,21 +32,22 @@ export class ShowPieceComponent implements OnInit {
     );
   }
 
-  loadWishlist(): void {
-    this.clientService.getWishlist().subscribe(
-      (wishlistPieces) => {
-        this.wishlist = wishlistPieces.map(piece => piece.idPiece);
-      },
-      (error) => {
-        console.error('Error fetching wishlist:', error);
-      }
-    );
-  }
+  // Commented out wishlist-related code
+  // loadWishlist(): void {
+  //   this.clientService.getWishlist().subscribe(
+  //     (wishlistPieces) => {
+  //       this.wishlist = wishlistPieces.map(piece => piece.idPiece);
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching wishlist:', error);
+  //     }
+  //   );
+  // }
 
   loadCart(): void {
     this.clientService.getCart().subscribe(
-      (cartItems) => {
-        this.cart = cartItems.reduce((acc, item) => {
+      (cartItems: CartItem[]) => {  // Use CartItem[] as the type for cartItems
+        this.cart = cartItems.reduce((acc: { [key: number]: number }, item: CartItem) => {
           acc[item.pieceId] = item.quantity;
           return acc;
         }, {});
@@ -56,17 +57,19 @@ export class ShowPieceComponent implements OnInit {
       }
     );
   }
+  
 
-  addToWishlist(pieceId: number): void {
-    this.clientService.addToWishlist(pieceId).subscribe(
-      () => {
-        this.wishlist.push(pieceId);
-      },
-      (error) => {
-        console.error('Error adding to wishlist:', error);
-      }
-    );
-  }
+  // Commented out wishlist-related code
+  // addToWishlist(pieceId: number): void {
+  //   this.clientService.addToWishlist(pieceId).subscribe(
+  //     () => {
+  //       this.wishlist.push(pieceId);
+  //     },
+  //     (error) => {
+  //       console.error('Error adding to wishlist:', error);
+  //     }
+  //   );
+  // }
 
   addToCart(pieceId: number): void {
     this.clientService.addToCart(pieceId, 1).subscribe(
@@ -79,9 +82,10 @@ export class ShowPieceComponent implements OnInit {
     );
   }
 
-  isInWishlist(pieceId: number): boolean {
-    return this.wishlist.includes(pieceId);
-  }
+  // Commented out wishlist-related method
+  // isInWishlist(pieceId: number): boolean {
+  //   return this.wishlist.includes(pieceId);
+  // }
 
   getCartQuantity(pieceId: number): number {
     return this.cart[pieceId] || 0;
