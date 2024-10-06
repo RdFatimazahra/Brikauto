@@ -64,8 +64,7 @@ public class PieceController {
     @Autowired
     private PieceService pieceService;
 
-//    @Autowired
-//    private FournisseurRepository fournisseurRepository;
+
 
     @PostMapping("/add")
     public ResponseEntity<PieceDto> createPiece(@RequestBody PieceDto pieceDTO) {

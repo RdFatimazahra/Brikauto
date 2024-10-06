@@ -2,19 +2,19 @@
     <h1>Auto Parts Showroom</h1>
     <div class="parts-grid">
       <div *ngFor="let part of autoParts" class="part-card">
-        <img [src]="part.image" [alt]="part.name" class="part-image">
-        <h2>{{ part.name }}</h2>
-        <p class="description">{{ part.description }}</p>
-        <p class="price">${{ part.price.toFixed(2) }}</p>
+        <img [src]="part.image" [alt]="part.nom" class="part-image">
+        <h2>{{ part.nom }}</h2>
+        <p class="description">{{ part.reference }}</p>
+        <p class="price">${{ part.prix.toFixed(2) }}</p>
         <div class="button-group">
-          <button (click)="addToWishlist(part.id)" [class.in-wishlist]="isInWishlist(part.id)" class="wishlist-button">
+          <button (click)="addToWishlist(part.idPiece)" [class.in-wishlist]="isInWishlist(part.idPiece)" class="wishlist-button">
             <span class="heart-icon">&#10084;</span>
-            {{ isInWishlist(part.id) ? 'In Wishlist' : 'Add to Wishlist' }}
+            {{ isInWishlist(part.idPiece) ? 'In Wishlist' : 'Add to Wishlist' }}
           </button>
-          <button (click)="addToCart(part.id)" class="cart-button">
+          <button (click)="addToCart(part.idPiece)" class="cart-button">
             Add to Cart
-            <span *ngIf="getCartQuantity(part.id) > 0" class="cart-quantity">
-              ({{ getCartQuantity(part.id) }})
+            <span *ngIf="getCartQuantity(part.idPiece) > 0" class="cart-quantity">
+              ({{ getCartQuantity(part.idPiece) }})
             </span>
           </button>
         </div>

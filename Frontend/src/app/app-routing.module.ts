@@ -7,6 +7,7 @@ import { AddPieceComponent } from './pages/piece/add-piece/add-piece/add-piece.c
 import { HomepageComponent } from './home/homepage/homepage.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { OrderComponent } from './pages/order/order/order.component';
+import { ShowPieceComponent } from './client/Show-piece/show-piece/show-piece.component';
 
 const routes: Routes = [
     { path: 'dashboard', component: DashbordComponent, children: [
@@ -20,6 +21,7 @@ const routes: Routes = [
     {path: 'home', component: HomepageComponent},
     {path: 'navbar', component: NavbarComponent},
     {path: 'order', component: OrderComponent},
+    {path: 'show', component: ShowPieceComponent}
 ];
 
 @NgModule({

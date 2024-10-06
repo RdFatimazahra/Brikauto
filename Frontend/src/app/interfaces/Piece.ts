@@ -4,6 +4,5 @@ export interface Piece {
     reference : string;
     prix : number;
     quantite: number;
-    idFournisseur : number;
     image: string;
 }
