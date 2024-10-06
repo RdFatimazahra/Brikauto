@@ -1,47 +1,89 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Piece } from 'src/app/interfaces/Piece';
+import { ClientService } from 'src/app/services/client.service';
 
 
-export interface Piece {
-  idPiece: number;
-  nom: string;
-  reference: string;
-  prix: number;
-  quantite: number;
-  image: string;
-}
 @Component({
   selector: 'app-show-piece',
   templateUrl: './show-piece.component.html',
   styleUrls: ['./show-piece.component.scss']
 })
-export class ShowPieceComponent {
-  autoParts: Piece[] = [
-    { idPiece: 1, nom: 'Oil Filter', reference: 'Ref125', prix: 12.99,quantite:2, image: 'assets/oil-filter.png' },
-    { idPiece: 2, nom: 'Oil Filter', reference: 'Ref125', prix: 12.99,quantite:2, image: 'assets/brake-pads.png' },
-    { idPiece: 3, nom: 'Oil Filter', reference: 'Ref125', prix: 12.99,quantite:2, image: 'assets/spark-plugs.png' },
-    { idPiece: 4, nom: 'Oil Filter', reference: 'Ref125', prix: 12.99,quantite:2, image: 'assets/air-filter.png' },
-    {idPiece: 5, nom: 'Oil Filter', reference: 'Ref125', prix: 12.99,quantite:2, image: 'assets/alternator.png' },
-    {idPiece: 6, nom: 'Oil Filter', reference: 'Ref125', prix: 12.99,quantite:2,image: 'assets/radiator.png' },
-  ];
-
+export class ShowPieceComponent implements OnInit {
+  autoParts: Piece[] = [];
   wishlist: number[] = [];
   cart: { [key: number]: number } = {};
 
-  addToWishlist(partId: number) {
-    if (!this.wishlist.includes(partId)) {
-      this.wishlist.push(partId);
-    }
+  constructor(private clientService: ClientService) { }
+
+  ngOnInit(): void {
+    this.loadPieces();
+    this.loadWishlist();
+    this.loadCart();
   }
 
-  addToCart(partId: number) {
-    this.cart[partId] = (this.cart[partId] || 0) + 1;
+  loadPieces(): void {
+    this.clientService.getAllPieces().subscribe(
+      (pieces) => {
+        this.autoParts = pieces;
+      },
+      (error) => {
+        console.error('Error fetching pieces:', error);
+      }
+    );
   }
 
-  isInWishlist(partId: number): boolean {
-    return this.wishlist.includes(partId);
+  loadWishlist(): void {
+    this.clientService.getWishlist().subscribe(
+      (wishlistPieces) => {
+        this.wishlist = wishlistPieces.map(piece => piece.idPiece);
+      },
+      (error) => {
+        console.error('Error fetching wishlist:', error);
+      }
+    );
   }
 
-  getCartQuantity(partId: number): number {
-    return this.cart[partId] || 0;
+  loadCart(): void {
+    this.clientService.getCart().subscribe(
+      (cartItems) => {
+        this.cart = cartItems.reduce((acc, item) => {
+          acc[item.pieceId] = item.quantity;
+          return acc;
+        }, {});
+      },
+      (error) => {
+        console.error('Error fetching cart:', error);
+      }
+    );
+  }
+
+  addToWishlist(pieceId: number): void {
+    this.clientService.addToWishlist(pieceId).subscribe(
+      () => {
+        this.wishlist.push(pieceId);
+      },
+      (error) => {
+        console.error('Error adding to wishlist:', error);
+      }
+    );
+  }
+
+  addToCart(pieceId: number): void {
+    this.clientService.addToCart(pieceId, 1).subscribe(
+      () => {
+        this.cart[pieceId] = (this.cart[pieceId] || 0) + 1;
+      },
+      (error) => {
+        console.error('Error adding to cart:', error);
+      }
+    );
+  }
+
+  isInWishlist(pieceId: number): boolean {
+    return this.wishlist.includes(pieceId);
+  }
+
+  getCartQuantity(pieceId: number): number {
+    return this.cart[pieceId] || 0;
   }
 }
