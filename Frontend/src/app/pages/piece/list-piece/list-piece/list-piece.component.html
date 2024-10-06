@@ -10,7 +10,6 @@
           <th>Référence</th>
           <th>Quantité</th>
           <th>prix</th>
-          <th>idFournisseur</th>
           <th>image</th>
           <th>Actions</th>
         </tr>
@@ -21,11 +20,10 @@
           <td>{{ piece.reference }}</td>
           <td>{{ piece.quantite }}</td>
           <td>{{ piece.prix }}</td>
-          <td>{{ piece.idFournisseur }}</td>
           <td><img src="{{ piece.image }}" style="width:100px; height: auto ;"></td>
           <td>
             <a class="btn btn-success mr-2" [routerLink]="['edit', piece.idPiece]">Edit</a>
-            <button (click)="piece.idPiece ? deletePiece(piece.idPiece) : null" class="btn btn-danger btn-sm">Supprimer</button>
+            <button (Onclick)="piece.idPiece ? deletePiece(piece.idPiece) : null" class="btn btn-danger btn-sm">Supprimer</button>
           </td>
         </tr>
       </tbody>

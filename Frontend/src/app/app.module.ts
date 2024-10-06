@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { JwtModule, JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login/login.component';
@@ -20,6 +21,7 @@ import { AuthInterceptorInterceptor } from './interceptor/auth-interceptor.inter
 import { HomepageComponent } from './home/homepage/homepage.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { OrderComponent } from './pages/order/order/order.component';
+import { ShowPieceComponent } from './client/Show-piece/show-piece/show-piece.component';
 
 // Function to retrieve the token
 export function tokenGetter() {
@@ -36,7 +38,8 @@ export function tokenGetter() {
     EditPieceComponent,
     HomepageComponent,
     NavbarComponent,
-    OrderComponent
+    OrderComponent,
+    ShowPieceComponent
   ],
   imports: [
     BrowserModule,

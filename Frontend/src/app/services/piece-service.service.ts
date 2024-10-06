@@ -23,6 +23,7 @@ export class ListPieceService {
     return this.http.delete<void>(`${BASE_URL}/${id}`, { headers });
   }
 
+  
   // Mise à jour d'une pièce
   updatePiece(piece: Piece, idPiece: number): Observable<Piece> {
     const headers = this.createAuthorizationHeader();

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthenticateService } from 'src/app/services/authenticate-service.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { AuthenticateService } from 'src/app/services/authenticate-service.servi
   templateUrl: './dashbord.component.html',
   styleUrls: ['./dashbord.component.scss']
 })
-export class DashbordComponent {
+export class DashbordComponent implements OnInit {
 
 
   isSidebarActive = false;
