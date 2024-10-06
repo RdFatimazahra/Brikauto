@@ -1,0 +1,56 @@
+<div class="order-container">
+    <app-navbar></app-navbar>
+    <div class="main-content">
+      <h1>Complete Your Order</h1>
+      <div class="order-summary">
+        <h2>Order Summary</h2>
+        <ul>
+          <li *ngFor="let item of orderItems">
+            {{ item.name }} - ${{ item.price.toFixed(2) }} x {{ item.quantity }}
+          </li>
+        </ul>
+        <p class="total">Total: ${{ totalPrice.toFixed(2) }}</p>
+      </div>
+      <form [formGroup]="orderForm" (ngSubmit)="onSubmit()" class="order-form">
+        <h2>Shipping Information</h2>
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input id="fullName" type="text" formControlName="fullName">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" type="email" formControlName="email">
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input id="address" type="text" formControlName="address">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="city">City</label>
+            <input id="city" type="text" formControlName="city">
+          </div>
+          <div class="form-group">
+            <label for="zipCode">Zip Code</label>
+            <input id="zipCode" type="text" formControlName="zipCode">
+          </div>
+        </div>
+        <h2>Payment Information</h2>
+        <div class="form-group">
+          <label for="cardNumber">Card Number</label>
+          <input id="cardNumber" type="text" formControlName="cardNumber">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="expirationDate">Expiration Date (MM/YY)</label>
+            <input id="expirationDate" type="text" formControlName="expirationDate">
+          </div>
+          <div class="form-group">
+            <label for="cvv">CVV</label>
+            <input id="cvv" type="text" formControlName="cvv">
+          </div>
+        </div>
+        <button type="submit" [disabled]="!orderForm.valid" class="submit-button">Place Order</button>
+      </form>
+    </div>
+  </div>

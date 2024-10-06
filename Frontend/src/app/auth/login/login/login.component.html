@@ -96,7 +96,7 @@
             <label for="register-password">Mot de passe</label>
             <input type="password" id="register-password" formControlName="password" placeholder="Mot de passe">
           </div>
-          <button type="submit" class="submit-btn" [disabled]="registerForm.invalid">S'inscrire</button>
+          <button type="submit" class="submit-btn" [disabled]="registerForm.invalid" routerLink="login">S'inscrire</button>
         </form>
         <!-- ... -->
       </div>

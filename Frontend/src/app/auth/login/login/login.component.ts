@@ -111,11 +111,11 @@ export class LoginComponent implements OnInit {
             this.router.navigateByUrl('/dashboard');
             break;
           case 'USER':
-            this.router.navigateByUrl('/dashboard/user-dashboard');
-            break;
-          case 'FOURNISSEUR':
             this.router.navigateByUrl('/dashboard');
             break;
+          // case 'FOURNISSEUR':
+          //   this.router.navigateByUrl('/dashboard');
+          //   break;
           default:
             this.router.navigateByUrl('/dashboard');
         }
@@ -125,7 +125,7 @@ export class LoginComponent implements OnInit {
 
   submitRegisterForm(): void {
     if (this.registerForm.valid) {
-      this.service.registerFournisseur(this.registerForm.value).subscribe(
+      this.service.register(this.registerForm.value).subscribe(
         (response: Jwt) => {
           console.log('Registration successful', response);
           // Optionally, you can automatically log the user in after registration

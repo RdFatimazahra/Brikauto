@@ -17,6 +17,9 @@ import { AddPieceComponent } from './pages/piece/add-piece/add-piece/add-piece.c
 import { EditPieceComponent } from './pages/piece/edit-piece/edit-piece/edit-piece.component';
 import { AuthenticateService } from './services/authenticate-service.service';
 import { AuthInterceptorInterceptor } from './interceptor/auth-interceptor.interceptor';
+import { HomepageComponent } from './home/homepage/homepage.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { OrderComponent } from './pages/order/order/order.component';
 
 // Function to retrieve the token
 export function tokenGetter() {
@@ -30,7 +33,10 @@ export function tokenGetter() {
     DashbordComponent,
     PieceListComponent,
     AddPieceComponent,
-    EditPieceComponent
+    EditPieceComponent,
+    HomepageComponent,
+    NavbarComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,

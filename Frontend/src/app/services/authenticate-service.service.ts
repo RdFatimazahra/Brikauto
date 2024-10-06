@@ -18,9 +18,13 @@ export class AuthenticateService {
 
   constructor(private http: HttpClient,private jwtHelper:JwtHelperService,  private router: Router) { }
 
-  registerFournisseur(signRequest: any): Observable<Jwt> {
-    return this.http.post<Jwt>(BASE_URL + 'registerFournisseur', signRequest);
+  register(signRequest: any): Observable<Jwt> {
+    return this.http.post<Jwt>(BASE_URL + '/register', signRequest);
   }
+
+  // registerFournisseur(signRequest: any): Observable<Jwt> {
+  //   return this.http.post<Jwt>(BASE_URL + 'registerFournisseur', signRequest);
+  // }
 
   login(loginRequest: any): Observable<Jwt> {
     return this.http.post<Jwt>(BASE_URL + 'authenticate', loginRequest);
@@ -56,6 +60,8 @@ export class AuthenticateService {
 
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('role');
     this.router.navigate(['/login']);  // Redirect to login page after logout
   }
 
