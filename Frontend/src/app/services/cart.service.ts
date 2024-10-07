@@ -11,32 +11,43 @@ export interface CartItem extends Piece {
   providedIn: 'root'
 })
 export class CartService {
-  private apiUrl = 'http://localhost:8082/api/v1/User/pieces'; // Adjust this URL as needed
-  private cartItems: CartItem[] = [];
-  private cartSubject = new BehaviorSubject<CartItem[]>([]);
+ /////////////////
+ private baseUrl = 'http://localhost:8082/api/cart'; // Replace with your backend URL
 
-  constructor(private http: HttpClient) { }
+ constructor(private http: HttpClient) {}
+
+ // Add to Cart API
+ addToCart(panierId: number, pieceId: number, quantity: number): Observable<any> {
+   const url = `${this.baseUrl}/add/${panierId}/${pieceId}/${quantity}`;
+   return this.http.post<any>(url, {});
+ }
+
+ // Get Panier ID by User ID
+ getPanierIdByUserId(userId: number): Observable<number> {
+   const url = `${this.baseUrl}/user/${userId}`;
+   return this.http.post<number>(url, {});
+ }
+ ////////////////
+
+ //Old functions//////
 
   getCart(): Observable<CartItem[]> {
     const headers = this.createAuthorizationHeader();
-    return this.http.get<CartItem[]>(`${this.apiUrl}/cart`, { headers });
+    return this.http.get<CartItem[]>(`${this.baseUrl}/cart`, { headers });
   }
 
 
 
-  addToCart(piece: Piece, quantity: number = 1): Observable<any> {
-    const headers = this.createAuthorizationHeader();
-    return this.http.post(`${this.apiUrl}/cart/add`, { pieceId: piece.id, quantity }, { headers });
-  }
+
 
   removeFromCart(pieceId: number): Observable<any> {
     const headers = this.createAuthorizationHeader();
-    return this.http.delete(`${this.apiUrl}/cart/remove/${pieceId}`, { headers });
+    return this.http.delete(`${this.baseUrl}/cart/remove/${pieceId}`, { headers });
   }
 
   updateQuantity(pieceId: number, quantity: number): Observable<any> {
     const headers = this.createAuthorizationHeader();
-    return this.http.put(`${this.apiUrl}/cart/update`, { pieceId, quantity }, { headers });
+    return this.http.put(`${this.baseUrl}/cart/update`, { pieceId, quantity }, { headers });
   }
 
   getItemQuantity(pieceId: number): Observable<number> {
@@ -67,7 +78,7 @@ export class CartService {
 
   placeOrder(orderData: any): Observable<any> {
     const headers = this.createAuthorizationHeader();
-    return this.http.post(`${this.apiUrl}/order`, orderData, { headers });
+    return this.http.post(`${this.baseUrl}/order`, orderData, { headers });
   }
 
   private createAuthorizationHeader(): HttpHeaders {

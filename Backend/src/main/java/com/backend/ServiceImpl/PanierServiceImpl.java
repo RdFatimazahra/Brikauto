@@ -79,4 +79,15 @@ public class PanierServiceImpl {
         }
     }
 
+    public int getPanierItemCount(Long panierId) {
+        Optional<Panier> panier = panierRepository.findById(panierId);
+        if (panier.isPresent()) {
+            // Summing the quantity of all PanierItems in the Panier
+            return panier.get().getItems().stream()
+                    .mapToInt(PanierItem::getQuantite)
+                    .sum();
+        }
+        return 0;
+    }
+
 }
