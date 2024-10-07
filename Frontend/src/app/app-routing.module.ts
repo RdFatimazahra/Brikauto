@@ -6,7 +6,6 @@ import { PieceListComponent } from './pages/piece/list-piece/list-piece/list-pie
 import { AddPieceComponent } from './pages/piece/add-piece/add-piece/add-piece.component';
 import { HomepageComponent } from './home/homepage/homepage.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
-import { OrderComponent } from './pages/order/order/order.component';
 import { ShowPieceComponent } from './client/Show-piece/show-piece/show-piece.component';
 
 const routes: Routes = [
@@ -20,7 +19,6 @@ const routes: Routes = [
     {path: 'add-piece', component: AddPieceComponent},
     {path: 'home', component: HomepageComponent},
     {path: 'navbar', component: NavbarComponent},
-    {path: 'order', component: OrderComponent},
     {path: 'show', component: ShowPieceComponent}
 ];
 

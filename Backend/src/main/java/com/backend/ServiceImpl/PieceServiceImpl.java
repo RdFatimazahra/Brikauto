@@ -17,9 +17,6 @@ public class PieceServiceImpl implements PieceService {
     @Autowired
     private PieceRepository pieceRepository;
 
-//    @Autowired
-//    private FournisseurRepository fournisseurRepository;
-
     @Autowired
     private PieceMapper pieceMapper;
 
@@ -58,5 +55,12 @@ public class PieceServiceImpl implements PieceService {
     @Override
     public void deletePiece(int id) {
         pieceRepository.deleteById(id);
+    }
+
+    @Override
+    public PieceDto getPieceDetails(int id) {
+        Piece piece = pieceRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Piece not found"));
+        return pieceMapper.toPieceDTO(piece);
     }
 }

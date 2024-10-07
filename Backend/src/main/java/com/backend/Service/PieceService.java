@@ -10,4 +10,5 @@ public interface PieceService {
     PieceDto createPiece(PieceDto pieceDTO);
     PieceDto updatePiece(int id, PieceDto pieceDTO);
     void deletePiece(int id);
+    PieceDto getPieceDetails(int id);
 }

@@ -20,7 +20,6 @@ import { AuthenticateService } from './services/authenticate-service.service';
 import { AuthInterceptorInterceptor } from './interceptor/auth-interceptor.interceptor';
 import { HomepageComponent } from './home/homepage/homepage.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
-import { OrderComponent } from './pages/order/order/order.component';
 import { ShowPieceComponent } from './client/Show-piece/show-piece/show-piece.component';
 
 // Function to retrieve the token
@@ -38,8 +37,9 @@ export function tokenGetter() {
     EditPieceComponent,
     HomepageComponent,
     NavbarComponent,
-    OrderComponent,
-    ShowPieceComponent
+    ShowPieceComponent,
+    
+    
   ],
   imports: [
     BrowserModule,
