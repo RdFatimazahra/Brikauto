@@ -24,7 +24,7 @@ public class Commande {
     @ManyToOne
     private Utilisateur utilisateur;
 
-    @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL)
-    private List<OrderItem> items;
+
+
 
 }

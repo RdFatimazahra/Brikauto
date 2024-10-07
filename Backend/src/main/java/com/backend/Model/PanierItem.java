@@ -22,7 +22,23 @@ public class PanierItem {
     @ManyToOne
     private Piece piece;
 
-    public Object getIdOrderItem() {
-        return idPanierItem;
+
+    private double price;
+
+    private  double totalPrice;
+
+
+    public Double getTotal() {
+        return quantite * piece.getPrix();
+    }
+
+    public void incrementQuantity() {
+        this.quantite++;
+    }
+
+    public void decrementQuantity() {
+        if (this.quantite > 1) {
+            this.quantite--;
+        }
     }
 }

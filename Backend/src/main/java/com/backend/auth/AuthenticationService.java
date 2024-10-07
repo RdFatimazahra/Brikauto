@@ -1,9 +1,11 @@
 package com.backend.auth;
 
 import com.backend.Model.Admin;
+import com.backend.Model.Panier;
 import com.backend.Model.Role;
 import com.backend.Model.Utilisateur;
 //import com.backend.Repository.FournisseurRepository;
+import com.backend.Repository.PanierRepository;
 import com.backend.Repository.UserRepository;
 import com.backend.Repository.UtilisateurRepository;
 import com.backend.config.JwtService;
@@ -26,6 +28,8 @@ public class AuthenticationService {
 
     private final AuthenticationManager authenticationManager;
 
+    private final PanierRepository panierRepository;
+
     //RegisterUser :
     public AuthenticationResponse register(RegisterRequest request) {
         var user = new Utilisateur();
@@ -35,12 +39,21 @@ public class AuthenticationService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(Role.USER);
 
+        //register user for cart
+       Utilisateur savedUser = userRepository.save(user);
 
-        userRepository.save(user);
+
+       //create new panier for new client ::
+        Panier panier = new Panier();
+        panier.setUtilisateur(savedUser);
+        panierRepository.save(panier);
+
+
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .role(user.getRole().name())
+                .id(user.getId())
                 .build();
 
 

@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -21,9 +22,30 @@ public class Panier {
     private Utilisateur utilisateur;
 
     @OneToMany(mappedBy = "panier", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PanierItem> items;
+    private List<PanierItem> items = new ArrayList<>();
 
+    private Double total;
 
-    public void addItem(OrderItem newItem) {
+    public void addItem(PanierItem newItem) {
+        items.add(newItem);
+        newItem.setPanier(this);
+        updateTotal();
+    }
+
+    public void removeItem(PanierItem item) {
+        items.remove(item);
+        item.setPanier(null);
+        updateTotal();
+    }
+
+    public void updateTotal() {
+        this.total = items.stream()
+                .mapToDouble(item -> item.getPiece().getPrix() * item.getQuantite())
+                .sum();
+    }
+
+    public void clear() {
+        items.clear();
+        updateTotal();
     }
 }
