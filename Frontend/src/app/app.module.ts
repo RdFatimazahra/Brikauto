@@ -21,6 +21,7 @@ import { AuthInterceptorInterceptor } from './interceptor/auth-interceptor.inter
 import { HomepageComponent } from './home/homepage/homepage.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ShowPieceComponent } from './client/Show-piece/show-piece/show-piece.component';
+import { PieceDetailsComponent } from './client/Show-piece/piece-details/piece-details.component';
 
 // Function to retrieve the token
 export function tokenGetter() {
@@ -38,6 +39,7 @@ export function tokenGetter() {
     HomepageComponent,
     NavbarComponent,
     ShowPieceComponent,
+    PieceDetailsComponent,
     
     
   ],

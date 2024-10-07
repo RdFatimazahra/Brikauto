@@ -41,7 +41,7 @@ export class PieceListComponent implements OnInit {
     if (confirm('Êtes-vous sûr de vouloir supprimer cette pièce ?')) {
       this.pieceService.deletePiece(id).subscribe(
         () => {
-          this.pieceList = this.pieceList.filter(piece => piece.idPiece !== id); // Mise à jour de la liste
+          this.pieceList = this.pieceList.filter(piece => piece.id !== id); // Mise à jour de la liste
           alert('Pièce supprimée avec succès');
         },
         (error) => {

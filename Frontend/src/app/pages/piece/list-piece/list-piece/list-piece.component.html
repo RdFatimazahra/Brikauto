@@ -22,8 +22,8 @@
           <td>{{ piece.prix }}</td>
           <td><img src="{{ piece.image }}" style="width:100px; height: auto ;"></td>
           <td>
-            <a class="btn btn-success mr-2" [routerLink]="['edit', piece.idPiece]">Edit</a>
-            <button (Onclick)="piece.idPiece ? deletePiece(piece.idPiece) : null" class="btn btn-danger btn-sm">Supprimer</button>
+            <a class="btn btn-success mr-2" [routerLink]="['edit', piece.id]">Edit</a>
+            <button (Onclick)="piece.id ? deletePiece(piece.id!) : null" class="btn btn-danger btn-sm">Supprimer</button>
           </td>
         </tr>
       </tbody>

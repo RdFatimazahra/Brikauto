@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartItem } from 'src/app/interfaces/CartItem';
 import { Piece } from 'src/app/interfaces/Piece';
 import { ClientService } from 'src/app/services/client.service';
@@ -13,7 +14,7 @@ export class ShowPieceComponent implements OnInit {
   // wishlist: number[] = []; // Commented out wishlist
   cart: { [key: number]: number } = {};
 
-  constructor(private clientService: ClientService) { }
+  constructor(private clientService: ClientService, private router: Router) { }
 
   ngOnInit(): void {
     this.loadPieces();
@@ -30,6 +31,15 @@ export class ShowPieceComponent implements OnInit {
         console.error('Error fetching pieces:', error);
       }
     );
+  }
+
+  //Show details:
+  showPieceDetails(piece: Piece): void {
+    if (piece && piece.id!== undefined) {
+      this.router.navigate(['/piece-details', piece.id]);
+    } else {
+      console.error('Attempted to navigate to piece details with undefined pieceId', piece);
+    }
   }
 
   // Commented out wishlist-related code

@@ -7,6 +7,7 @@ import { AddPieceComponent } from './pages/piece/add-piece/add-piece/add-piece.c
 import { HomepageComponent } from './home/homepage/homepage.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ShowPieceComponent } from './client/Show-piece/show-piece/show-piece.component';
+import { PieceDetailsComponent } from './client/Show-piece/piece-details/piece-details.component';
 
 const routes: Routes = [
     { path: 'dashboard', component: DashbordComponent, children: [
@@ -19,7 +20,8 @@ const routes: Routes = [
     {path: 'add-piece', component: AddPieceComponent},
     {path: 'home', component: HomepageComponent},
     {path: 'navbar', component: NavbarComponent},
-    {path: 'show', component: ShowPieceComponent}
+    {path: 'show', component: ShowPieceComponent},
+    {path:'piece-details/:id', component: PieceDetailsComponent}
 ];
 
 @NgModule({

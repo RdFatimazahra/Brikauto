@@ -1,5 +1,5 @@
 export interface Piece {
-    idPiece?: number;
+    id?: number;
     nom : string;
     reference : string;
     prix : number;

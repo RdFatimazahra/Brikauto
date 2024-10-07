@@ -1,26 +1,17 @@
-
 <app-navbar></app-navbar>
 <div class="showroom-container">
-    <h1>Auto Parts Showroom</h1>
-    <div class="parts-grid">
-      <div *ngFor="let part of autoParts" class="part-card">
-        <img [src]="part.image" [alt]="part.nom" class="part-image">
-        <h2>{{ part.nom }}</h2>
-        <p class="description">{{ part.reference }}</p>
-        <p class="price">{{ part.prix | currency:'dh' }}</p>
-        <div class="button-group">
-          <!-- Wishlist button commented out -->
-          <!--
-          <button (click)="addToWishlist(part.idPiece)" [class.in-wishlist]="isInWishlist(part.idPiece)" class="wishlist-button">
-            <span class="heart-icon">&#10084;</span>
-            {{ isInWishlist(part.idPiece) ? 'In Wishlist' : 'Add to Wishlist' }}
-          </button>
-          -->
-          <button *ngIf="part.idPiece !== undefined" (click)="addToCart(part.idPiece)" class="cart-button">
-            Add to Cart
-          </button>
-        </div>
+  <h1>Auto Parts Showroom</h1>
+  <div class="parts-grid">
+    <div *ngFor="let part of autoParts" class="part-card">
+      <img [src]="part.image" [alt]="part.nom" class="part-image" (click)="showPieceDetails(part)">
+      <h2>{{ part.nom }}</h2>
+      <p class="description">{{ part.reference }}</p>
+      <p class="price">{{ part.prix | currency:'dh' }}</p>
+      <div class="button-group">
+        <button (click)="addToCart(part.id!)" class="cart-button">
+          Add to Cart
+        </button>
       </div>
     </div>
   </div>
-  
+</div>

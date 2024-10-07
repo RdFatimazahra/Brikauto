@@ -22,11 +22,11 @@ export class CartService {
     return this.http.get<CartItem[]>(`${this.apiUrl}/cart`, { headers });
   }
 
-  
+
 
   addToCart(piece: Piece, quantity: number = 1): Observable<any> {
     const headers = this.createAuthorizationHeader();
-    return this.http.post(`${this.apiUrl}/cart/add`, { pieceId: piece.idPiece, quantity }, { headers });
+    return this.http.post(`${this.apiUrl}/cart/add`, { pieceId: piece.id, quantity }, { headers });
   }
 
   removeFromCart(pieceId: number): Observable<any> {
@@ -43,7 +43,7 @@ export class CartService {
     return new Observable(observer => {
       this.getCart().subscribe(
         (cartItems) => {
-          const item = cartItems.find(item => item.idPiece === pieceId);
+          const item = cartItems.find(item => item.id === pieceId);
           observer.next(item ? item.quantity : 0);
           observer.complete();
         },
