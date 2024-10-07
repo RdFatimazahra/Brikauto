@@ -22,6 +22,8 @@ export class CartService {
     return this.http.get<CartItem[]>(`${this.apiUrl}/cart`, { headers });
   }
 
+  
+
   addToCart(piece: Piece, quantity: number = 1): Observable<any> {
     const headers = this.createAuthorizationHeader();
     return this.http.post(`${this.apiUrl}/cart/add`, { pieceId: piece.idPiece, quantity }, { headers });

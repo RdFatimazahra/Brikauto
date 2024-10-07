@@ -17,6 +17,12 @@ export class ClientService {
     return this.http.get<Piece[]>(`${this.apiUrl}/show`, { headers });
   }
 
+  // Get piece details
+  getPieceDetails(pieceId: number): Observable<Piece> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.get<Piece>(`${this.apiUrl}/details/${pieceId}`, { headers });
+  }
+  
   // Add a piece to the wishlist
   addToWishlist(pieceId: number): Observable<any> {
     const headers = this.createAuthorizationHeader();
