@@ -23,6 +23,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ShowPieceComponent } from './client/Show-piece/show-piece/show-piece.component';
 import { PieceDetailsComponent } from './client/Show-piece/piece-details/piece-details.component';
 import { CartComponent } from './client/cart/cart.component';
+import { HeroSliderComponent } from './home/hero-slider/hero-slider.component';
 
 // Function to retrieve the token
 export function tokenGetter() {
@@ -42,6 +43,7 @@ export function tokenGetter() {
     ShowPieceComponent,
     PieceDetailsComponent,
     CartComponent,
+    HeroSliderComponent,
 
   ],
   imports: [

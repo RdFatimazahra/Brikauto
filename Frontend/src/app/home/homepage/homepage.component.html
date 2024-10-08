@@ -1,19 +1,23 @@
 <div class="home-container">
-    <app-navbar></app-navbar>
-    <main class="main-content">
-      <section class="hero">
+  <app-navbar></app-navbar>
+  <app-hero-slider></app-hero-slider>
+
+  <main class="main-content">
+    <!-- <section class="hero">
+      <div class="hero-content">
         <h1>Find the Right Part for Your Vehicle</h1>
         <p>Quality auto parts at competitive prices</p>
         <button (click)="navigateToPartsList()" class="search-button">Search Parts</button>
-      </section>
-      <section class="categories">
-        <h2>Featured Categories</h2>
-        <div class="category-grid">
-          <div *ngFor="let category of categories" class="category-card">
-            <img [src]="category.image" [alt]="category.name">
-            <h3>{{ category.name }}</h3>
-          </div>
+      </div>
+    </section> -->
+    <section class="categories">
+      <h2>Featured Categories</h2>
+      <div class="category-grid">
+        <div *ngFor="let category of categories" class="category-card">
+          <img [src]="category.image" [alt]="category.name">
+          <h3>{{ category.name }}</h3>
         </div>
-      </section>
-    </main>
-  </div>
+      </div>
+    </section>
+  </main>
+</div>
