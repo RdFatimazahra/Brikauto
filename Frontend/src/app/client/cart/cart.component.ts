@@ -1,66 +1,71 @@
-// import { Component, OnInit } from '@angular/core';
-// import { CartService, CartItem } from '../services/cart.service';
-// import { faPlus, faMinus, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit } from '@angular/core';
+import { CartItems } from 'src/app/interfaces/CartItems';
+import { AuthenticateService } from 'src/app/services/authenticate-service.service';
+import { CartService } from 'src/app/services/cart.service';
+import { OrderService } from 'src/app/services/order.service';
 
-// @Component({
-//   selector: 'app-cart',
-//   templateUrl: './cart.component.html',
-//   styleUrls: ['./cart.component.scss']
-// })
-// export class CartComponent implements OnInit {
-//   cartItems: CartItem[] = [];
-//   total: number = 0;
-//   faPlus = faPlus;
-//   faMinus = faMinus;
-//   faTimes = faTimes;
+@Component({
+  selector: 'app-cart',
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.scss']
+})
+export class CartComponent implements OnInit {
 
-//   constructor(private cartService: CartService) { }
+  cartItems: CartItems[] = [];
+  errorMessage: string | null = null;
 
-//   ngOnInit(): void {
-//     this.loadCart();
-//   }
+  constructor(
+    private cartService: CartService,
+    private authService: AuthenticateService,
+    private orderService: OrderService
+  ) { }
 
-//   loadCart(): void {
-//     this.cartService.getCart().subscribe(
-//       (items) => {
-//         this.cartItems = items;
-//         this.updateTotal();
-//       },
-//       (error) => console.error('Error loading cart:', error)
-//     );
-//   }
+  ngOnInit(): void {
+    this.loadCartItems();
+  }
 
-//   removeItem(pieceId: number): void {
-//     this.cartService.removeFromCart(pieceId).subscribe(
-//       () => this.loadCart(),
-//       (error) => console.error('Error removing item from cart:', error)
-//     );
-//   }
+  loadCartItems(): void {
+    const userId = this.authService.getId(); // Use the getId method
 
-//   updateQuantity(pieceId: number, change: number): void {
-//     const item = this.cartItems.find(item => item.idPiece === pieceId);
-//     if (item) {
-//       const newQuantity = item.quantity + change;
-//       if (newQuantity > 0) {
-//         this.cartService.updateQuantity(pieceId, newQuantity).subscribe(
-//           () => this.loadCart(),
-//           (error) => console.error('Error updating quantity:', error)
-//         );
-//       } else {
-//         this.removeItem(pieceId);
-//       }
-//     }
-//   }
+    if (userId) {
+      // Fetch cart items based on user ID
+      this.cartService.getPanierItemsByUtilisateurId(userId).subscribe(
+        (items) => {
+          console.log('Fetched cart items:', items); 
+          this.cartItems = items; // Assign fetched items to cartItems
+        },
+        error => {
+          this.errorMessage = 'Failed to load cart items.';
+          console.error('Error loading cart items:', error);
+        }
+      );
+    } else {
+      this.errorMessage = 'User not logged in.';
+    }
+  }
 
-//   updateTotal(): void {
-//     this.cartService.getTotal().subscribe(
-//       (total) => this.total = total,
-//       (error) => console.error('Error calculating total:', error)
-//     );
-//   }
 
-//   proceedToCheckout(): void {
-//     // Implement checkout logic here
-//     console.log('Proceeding to checkout');
-//   }
-// }
+
+
+  checkout(){
+    const userId = this.authService.getId(); 
+    if (userId) {
+      //place order
+      this.orderService.placeOrder(userId).subscribe(
+        (data)=>{
+            console.log("place order done ")
+        },
+        (error)=>{
+          console.error("your error",error)
+        }
+      )
+    } else {
+      this.errorMessage = 'User not logged in.';
+    }
+
+  }
+
+
+
+
+}

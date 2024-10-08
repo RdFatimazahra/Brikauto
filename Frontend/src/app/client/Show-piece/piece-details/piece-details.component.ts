@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Piece } from 'src/app/interfaces/Piece';
 import { ClientService } from 'src/app/services/client.service';
-import { CartService } from 'src/app/services/cart.service'; // Import CartService
+import { CartService } from 'src/app/services/cart.service';
+import { AuthenticateService } from 'src/app/services/authenticate-service.service';
 
 @Component({
   selector: 'app-piece-details',
@@ -11,12 +12,13 @@ import { CartService } from 'src/app/services/cart.service'; // Import CartServi
 })
 export class PieceDetailsComponent implements OnInit {
   piece: Piece | null = null;
-  panierId: number | null = null; // Panier ID for the current user
+  panierId: number | null = null;
 
   constructor(
     private route: ActivatedRoute,
     private clientService: ClientService,
-    private cartService: CartService // Inject CartService
+    private cartService: CartService,
+    private authService: AuthenticateService
   ) {}
 
   ngOnInit(): void {
@@ -38,17 +40,21 @@ export class PieceDetailsComponent implements OnInit {
     );
   }
 
-  // Load the Panier ID for the current user (assuming userId is 1 for demo purposes)
+  // Load the Panier ID for the current user
   loadPanierId(): void {
-    const userId = 1; // Replace with actual userId based on your authentication system
-    this.cartService.getPanierIdByUserId(userId).subscribe(
-      (panierId) => {
-        this.panierId = panierId;
-      },
-      (error) => {
-        console.error('Error fetching panier ID:', error);
-      }
-    );
+    const userId = this.authService.getId(); // Get the user ID directly
+    if (userId) {
+      this.cartService.getPanierIdByUserId(userId).subscribe(
+        (panierId) => {
+          this.panierId = panierId;
+        },
+        (error) => {
+          console.error('Error fetching panier ID:', error);
+        }
+      );
+    } else {
+      console.error('User ID not found.');
+    }
   }
 
   addToCart(pieceId: number): void {
@@ -62,6 +68,8 @@ export class PieceDetailsComponent implements OnInit {
           console.error('Error adding to cart:', error);
         }
       );
+    } else {
+      console.error('Panier ID is not available.');
     }
   }
 }

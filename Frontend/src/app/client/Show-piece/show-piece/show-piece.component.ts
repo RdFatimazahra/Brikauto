@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { CartItem } from 'src/app/interfaces/CartItem';
 import { Piece } from 'src/app/interfaces/Piece';
 import { ClientService } from 'src/app/services/client.service';
+import { CartService } from 'src/app/services/cart.service';
+import { AuthenticateService } from 'src/app/services/authenticate-service.service';
 
 @Component({
   selector: 'app-show-piece',
@@ -11,15 +13,23 @@ import { ClientService } from 'src/app/services/client.service';
 })
 export class ShowPieceComponent implements OnInit {
   autoParts: Piece[] = [];
-  // wishlist: number[] = []; // Commented out wishlist
   cart: { [key: number]: number } = {};
+  cartItemCount: number = 0;
+  userId: number | null = null;
+  panierId: number | null = null;
 
-  constructor(private clientService: ClientService, private router: Router) { }
+  constructor(
+    private clientService: ClientService,
+    private router: Router,
+    private cartService: CartService,
+    private authService: AuthenticateService
+  ) { }
 
   ngOnInit(): void {
     this.loadPieces();
-    // this.loadWishlist(); // Commented out wishlist loading
+    this.getUserIdAndPanier();
     this.loadCart();
+
   }
 
   loadPieces(): void {
@@ -33,69 +43,79 @@ export class ShowPieceComponent implements OnInit {
     );
   }
 
-  //Show details:
   showPieceDetails(piece: Piece): void {
-    if (piece && piece.id!== undefined) {
+    if (piece && piece.id !== undefined) {
       this.router.navigate(['/piece-details', piece.id]);
     } else {
       console.error('Attempted to navigate to piece details with undefined pieceId', piece);
     }
   }
 
-  // Commented out wishlist-related code
-  // loadWishlist(): void {
-  //   this.clientService.getWishlist().subscribe(
-  //     (wishlistPieces) => {
-  //       this.wishlist = wishlistPieces.map(piece => piece.idPiece);
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching wishlist:', error);
-  //     }
-  //   );
-  // }
-
   loadCart(): void {
     this.clientService.getCart().subscribe(
-      (cartItems: CartItem[]) => {  // Use CartItem[] as the type for cartItems
+      (cartItems: CartItem[]) => {
         this.cart = cartItems.reduce((acc: { [key: number]: number }, item: CartItem) => {
           acc[item.pieceId] = item.quantity;
           return acc;
         }, {});
+        this.updateCartItemCount();
       },
       (error) => {
         console.error('Error fetching cart:', error);
       }
     );
   }
-  
 
-  // Commented out wishlist-related code
-  // addToWishlist(pieceId: number): void {
-  //   this.clientService.addToWishlist(pieceId).subscribe(
-  //     () => {
-  //       this.wishlist.push(pieceId);
-  //     },
-  //     (error) => {
-  //       console.error('Error adding to wishlist:', error);
-  //     }
-  //   );
-  // }
+  getUserIdAndPanier() {
+    
 
-  addToCart(pieceId: number): void {
-    this.clientService.addToCart(pieceId, 1).subscribe(
-      () => {
-        this.cart[pieceId] = (this.cart[pieceId] || 0) + 1;
+    this.authService.getCurrentUserId().subscribe(
+      (userId) => {
+        this.userId = userId;
+        if (this.userId) {
+          this.getPanierId();
+        }
       },
-      (error) => {
-        console.error('Error adding to cart:', error);
-      }
+      (error) => console.error('Error getting user ID:', error)
     );
   }
 
-  // Commented out wishlist-related method
-  // isInWishlist(pieceId: number): boolean {
-  //   return this.wishlist.includes(pieceId);
-  // }
+  getPanierId() {
+    if (this.userId) {
+      this.cartService.getPanierIdByUserId(this.userId).subscribe(
+        (panierId) => {
+          this.panierId = panierId;
+          this.updateCartItemCount();
+        },
+        (error) => console.error('Error getting panier ID:', error)
+      );
+    }
+  }
+
+  updateCartItemCount() {
+    if (this.panierId) {
+      this.cartService.getCartItemCount(this.panierId).subscribe(
+        (count) => this.cartItemCount = count,
+        (error) => console.error('Error getting cart item count:', error)
+      );
+    }
+  }
+
+  addToCart(pieceId: number): void {
+    if (this.panierId) {
+      this.cartService.addToCart(this.panierId, pieceId, 1).subscribe(
+        () => {
+          this.cart[pieceId] = (this.cart[pieceId] || 0) + 1;
+          this.updateCartItemCount();
+        },
+        (error) => {
+          console.error('Error adding to cart:', error);
+        }
+      );
+    } else {
+      console.error('Panier ID is not available');
+    }
+  }
 
   getCartQuantity(pieceId: number): number {
     return this.cart[pieceId] || 0;

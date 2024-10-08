@@ -68,11 +68,12 @@ public class AuthenticationService {
         admin.setPassword(passwordEncoder.encode(request.getPassword()));
         admin.setRole(Role.ADMIN);
 
-        userRepository.save(admin);
+        Admin savedAdmin = userRepository.save(admin);
         var jwtToken = jwtService.generateToken(admin);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .role(admin.getRole().name())
+                .id(savedAdmin.getId())
                 .build();
 
 

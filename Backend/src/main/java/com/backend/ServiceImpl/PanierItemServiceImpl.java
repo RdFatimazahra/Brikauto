@@ -1,69 +1,82 @@
-//package com.backend.ServiceImpl;
+package com.backend.ServiceImpl;
+
+import com.backend.DTO.PanierItemsDto;
+import com.backend.Model.Panier;
+import com.backend.Model.PanierItem;
+import com.backend.Model.Utilisateur;
+import com.backend.Repository.PanierItemRepository;
+import com.backend.Repository.PanierRepository;
+import com.backend.Repository.UtilisateurRepository;
+import com.backend.exception.PanierNotFoundException;
+import com.backend.exception.UtilisateurNotFoundException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+public class PanierItemServiceImpl {
+
+    private final PanierItemRepository panierItemRepository;
+    private final PanierRepository panierRepository;
+    private final UtilisateurRepository utilisateurRepository;
+
+
+//    public List<PanierItemsDto> getPanierItemsByUtilisateurId(int idUtilisateur) {
+//        // Find the utilisateur by ID
+//        Optional<Utilisateur> utilisateurOpt = utilisateurRepository.findById(idUtilisateur);
 //
-//import com.backend.Model.OrderItem;
-//import com.backend.Model.Panier;
-//import com.backend.Model.Piece;
-//import com.backend.Model.Utilisateur;
-//import com.backend.Repository.PanierRepository;
-//import com.backend.Repository.PieceRepository;
-//import com.backend.Service.PanierItemService;
-//import jakarta.transaction.Transactional;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
+//        // If the utilisateur exists, get their panier and items
+//        if (utilisateurOpt.isPresent()) {
+//            Panier panier = utilisateurOpt.get().getPanier();
+//            if (panier != null) {
+//                List<PanierItem> panierItems = panier.getItems();
 //
-//@Service
-//public class PanierItemServiceImpl implements PanierItemService {
-//    @Autowired
-//    private PanierRepository panierRepository;
+//                // Map the PanierItem list to PanierItemsDto list
+//                return panierItems.stream()
+//                        .map(item -> new PanierItemsDto(
+//                                item.getPiece().getImage(),
+//                                item.getPiece().getNom(),
+//                                item.getPiece().getPrix(),
+//                                item.getQuantite(),
+//                                item.getTotal()
+//                        ))
+//                        .collect(Collectors.toList());
+//            }
+//        }
 //
-//    @Autowired
-//    private PieceRepository pieceRepository;
-//
-//    @Transactional
-//    public void addItemToPanier(Utilisateur utilisateur, int pieceId, int quantite) {
-//        Panier panier = panierRepository.findByUtilisateur(utilisateur)
-//                .orElseGet(() -> {
-//                    Panier newPanier = new Panier();
-//                    newPanier.setUtilisateur(utilisateur);
-//                    return newPanier;
-//                });
-//
-//        Piece piece = pieceRepository.findById(pieceId)
-//                .orElseThrow(() -> new RuntimeException("Piece not found"));
-//
-//        OrderItem newItem = new OrderItem();
-//        newItem.setPiece(piece);
-//        newItem.setQuantite(quantite);
-//        newItem.setPrixUnitaire(piece.getPrix());
-//
-//        panier.addItem(newItem);
-//        panierRepository.save(panier);
+//        // If no panier or utilisateur found, return an empty list
+//        return List.of();
 //    }
-//
-//    @Transactional
-//    public void removeItemFromPanier(Utilisateur utilisateur, Long orderItemId) {
-//        Panier panier = panierRepository.findByUtilisateur(utilisateur)
-//                .orElseThrow(() -> new RuntimeException("Panier not found"));
-//
-//        panier.getItems().removeIf(item -> item.getIdOrderItem().equals(orderItemId));
-//        panierRepository.save(panier);
-//    }
-//
-//    public Panier getPanierForUser(Utilisateur utilisateur) {
-//        return panierRepository.findByUtilisateur(utilisateur)
-//                .orElseGet(() -> {
-//                    Panier newPanier = new Panier();
-//                    newPanier.setUtilisateur(utilisateur);
-//                    return panierRepository.save(newPanier);
-//                });
-//    }
-//
-//    @Transactional
-//    public void clearPanier(Utilisateur utilisateur) {
-//        Panier panier = panierRepository.findByUtilisateur(utilisateur)
-//                .orElseThrow(() -> new RuntimeException("Panier not found"));
-//
-//        panier.getItems().clear();
-//        panierRepository.save(panier);
-//    }
-//}
+
+
+
+    public List<PanierItemsDto> getPanierItemsByUtilisateurId(int idUtilisateur) {
+        // Find the utilisateur by ID
+        Utilisateur utilisateur = utilisateurRepository.findById(idUtilisateur)
+                .orElseThrow(() -> new UtilisateurNotFoundException("Utilisateur not found with ID: " + idUtilisateur));
+
+        // Get the panier of the utilisateur
+        Panier panier = utilisateur.getPanier();
+        if (panier == null) {
+            throw new PanierNotFoundException("Panier not found for utilisateur with ID: " + idUtilisateur);
+        }
+
+        // Get panier items and map to DTO
+        List<PanierItem> panierItems = panier.getItems();
+        return panierItems.stream()
+                .map(item -> new PanierItemsDto(
+                        item.getPiece().getImage(),
+                        item.getPiece().getNom(),
+                        item.getPiece().getPrix(),
+                        item.getQuantite(),
+                        item.getTotal()
+                ))
+                .collect(Collectors.toList());
+    }
+
+
+}

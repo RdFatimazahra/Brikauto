@@ -12,6 +12,13 @@
           <span *ngIf="cartItemCount > 0" class="cart-badge">{{ cartItemCount }}</span>
         </a>
       </li>
+      <!-- Wishlist link with wishlist icon -->
+      <li class="wishlist-item">
+        <a [routerLink]="wishlistLink" class="nav-link">
+          <i class="fas fa-heart"></i> Wishlist 
+          <span *ngIf="wishlistItemCount > 0" class="wishlist-badge">{{ wishlistItemCount }}</span>
+        </a>
+      </li>
     </ul>
   </div>
 </nav>

@@ -1,37 +1,39 @@
-<!-- cart.component.html -->
 <div class="cart-container">
-    <h2>Cart Totals</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Name</th>
-          <th>Unit Price</th>
-          <th>Quantity</th>
-          <th>Total</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of cartItems">
-          <td><img [src]="item.image" [alt]="item.nom" class="cart-image"></td>
-          <td>{{ item.nom }}</td>
-          <td>{{ item.prix | currency:'dh' }}</td>
-          <td>
-            <button (click)="updateQuantity(item.idPiece, -1)"><fa-icon [icon]="faMinus"></fa-icon></button>
-            {{ item.quantity }}
-            <button (click)="updateQuantity(item.idPiece, 1)"><fa-icon [icon]="faPlus"></fa-icon></button>
-          </td>
-          <td>{{ item.prix * item.quantity | currency:'dh' }}</td>
-          <td><button (click)="removeItem(item.idPiece)"><fa-icon [icon]="faTimes"></fa-icon></button></td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="cart-summary">
-      <p>Subtotal: {{ getTotal() | currency:'dh' }}</p>
-      <p>Shipping: $30.00</p>
-      <p>Total: {{ getTotal() + 30 | currency:'dh' }}</p>
-      <p>Payable Total: {{ getTotal() + 30 | currency:'dh' }}</p>
-      <button (click)="proceedToCheckout()" class="checkout-button">Proceed to Checkout</button>
+    <h2>Your Shopping Cart</h2>
+  
+    <!-- Display error message if there is one -->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
     </div>
+  
+    <!-- Check if there are any cart items -->
+    <div *ngIf="cartItems.length === 0" class="empty-cart">
+      <p>Your cart is empty.</p>
+    </div>
+  
+    <!-- Display cart items -->
+    <div *ngFor="let item of cartItems" class="cart-item">
+      <img [src]="item.pieceImageLink" alt="{{ item.pieceName }}" class="item-image" />
+      <div class="item-details">
+        <h3>{{ item.pieceName }}</h3>
+        <p>Price: {{ item.piecePrice | currency }}</p>
+        <p>Quantity: {{ item.quantite }}</p>
+        <p>Total: {{ item.totalPrice | currency }}</p>
+      </div>
+    </div>
+  
+    <!-- Optional: Display total price of all items in the cart -->
+    <!-- <div class="total-price" *ngIf="cartItems.length > 0">
+      <h3>
+        Total: 
+        {{ cartItems.reduce((total, item) => total + item.totalPrice, 0) | currency }}
+      </h3>
+    </div> -->
   </div>
+
+  <div class="parent-container">
+  <button class="custom-test" (click)="checkout()">
+        checkout
+  </button>
+  </div>
+  
