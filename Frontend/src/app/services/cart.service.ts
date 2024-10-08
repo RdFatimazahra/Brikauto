@@ -47,6 +47,21 @@ getPanierItemsByUtilisateurId(userId: number): Observable<CartItems[]> {
   return this.http.get<CartItems[]>(url);
 }
 
+ // Increment Quantity API
+ incrementQuantity(panierId: number, pieceId: number): Observable<any> {
+  const headers = this.createAuthorizationHeader();
+  const url = `${this.baseUrl}/increment/${panierId}/${pieceId}`;
+  return this.http.post<any>(url, { headers });
+}
+
+// Decrement Quantity API
+decrementQuantity(panierId: number, pieceId: number): Observable<any> {
+  const headers = this.createAuthorizationHeader();
+  const url = `${this.baseUrl}/decrement/${panierId}/${pieceId}`;
+  return this.http.post<any>(url, { headers });
+}
+
+
 
 // getPanierItemsByUtilisateurId(userId: number): Observable<CartItems[]> {
 //   return this.http.get<CartItems[]>(`/api/v1/User/cart/items/${userId}`);
@@ -118,7 +133,7 @@ getPanierItemsByUtilisateurId(userId: number): Observable<CartItems[]> {
 
 
 
-  
+
 
 
 
