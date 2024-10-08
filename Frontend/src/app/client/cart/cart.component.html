@@ -1,39 +1,50 @@
 <div class="cart-container">
     <h2>Your Shopping Cart</h2>
-  
+
     <!-- Display error message if there is one -->
     <div *ngIf="errorMessage" class="error-message">
-      {{ errorMessage }}
+        {{ errorMessage }}
     </div>
-  
+
     <!-- Check if there are any cart items -->
     <div *ngIf="cartItems.length === 0" class="empty-cart">
-      <p>Your cart is empty.</p>
+        <p>Your cart is empty.</p>
     </div>
-  
-    <!-- Display cart items -->
-    <div *ngFor="let item of cartItems" class="cart-item">
-      <img [src]="item.pieceImageLink" alt="{{ item.pieceName }}" class="item-image" />
-      <div class="item-details">
-        <h3>{{ item.pieceName }}</h3>
-        <p>Price: {{ item.piecePrice | currency }}</p>
-        <p>Quantity: {{ item.quantite }}</p>
-        <p>Total: {{ item.totalPrice | currency }}</p>
-      </div>
-    </div>
-  
-    <!-- Optional: Display total price of all items in the cart -->
-    <!-- <div class="total-price" *ngIf="cartItems.length > 0">
-      <h3>
-        Total: 
-        {{ cartItems.reduce((total, item) => total + item.totalPrice, 0) | currency }}
-      </h3>
-    </div> -->
-  </div>
 
-  <div class="parent-container">
-  <button class="custom-test" (click)="checkout()">
-        checkout
-  </button>
-  </div>
-  
+    <!-- Table structure for cart items -->
+    <table class="cart-table" *ngIf="cartItems.length > 0">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Name</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of cartItems" class="cart-item-row">
+                <td class="product-image">
+                    <img [src]="item.pieceImageLink" alt="{{ item.pieceName }}" />
+                </td>
+                <td class="product-name">{{ item.pieceName }}</td>
+                <td class="unit-price">{{ item.piecePrice | currency }}</td>
+                <td class="quantity">
+                    <!-- <button (click)="decreaseQuantity(item)">-</button> -->
+                    <button >-</button>
+
+                    <span>{{ item.quantite }}</span>
+                    <!-- <button (click)="increaseQuantity(item)">+</button> -->
+                    <button >+</button>
+
+                </td>
+                <td class="total-price">{{ item.totalPrice | currency }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Checkout button -->
+    <div class="checkout-container">
+        <button class="checkout-button" (click)="checkout()">Checkout</button>
+    </div>
+</div>
