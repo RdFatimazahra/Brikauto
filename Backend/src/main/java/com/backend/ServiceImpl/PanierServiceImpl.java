@@ -90,4 +90,45 @@ public class PanierServiceImpl {
         return 0;
     }
 
+    // Increment quantity of the piece in the panier
+    public Panier incrementQuantity(Long panierId, Integer pieceId) {
+        Panier panier = panierRepository.findById(panierId).orElseThrow(
+                () -> new RuntimeException("Panier not found with id " + panierId)
+        );
+
+        PanierItem panierItem = panier.getItems().stream()
+                .filter(item -> item.getPiece().getId()==(pieceId))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Piece not found in panier"));
+
+        panierItem.setQuantite(panierItem.getQuantite() + 1);
+        panierItem.setTotalPrice(panierItem.getPrice() * panierItem.getQuantite());
+
+        return panierRepository.save(panier);
+    }
+
+    // Decrement quantity of the piece in the panier
+    public Panier decrementQuantity(Long panierId, Integer pieceId) {
+        Panier panier = panierRepository.findById(panierId).orElseThrow(
+                () -> new RuntimeException("Panier not found with id " + panierId)
+        );
+
+        PanierItem panierItem = panier.getItems().stream()
+                .filter(item -> item.getPiece().getId()==(pieceId))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Piece not found in panier"));
+
+        // Decrement the quantity but prevent it from going below 1
+        if (panierItem.getQuantite() > 1) {
+            panierItem.setQuantite(panierItem.getQuantite() - 1);
+            panierItem.setTotalPrice(panierItem.getPrice() * panierItem.getQuantite());
+        } else {
+            // Optionally remove the item from the cart if quantity is 1 and decrement is requested
+            panier.getItems().remove(panierItem);
+        }
+
+        return panierRepository.save(panier);
+    }
+
+
 }

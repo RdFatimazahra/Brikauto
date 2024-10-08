@@ -72,5 +72,22 @@ public class PanierController {
         }
     }
 
+    // Increment quantity for a piece in the panier
+    @PostMapping("/increment/{panierId}/{pieceId}")
+    public ResponseEntity<Panier> incrementQuantity(
+            @PathVariable Long panierId,
+            @PathVariable Integer pieceId) {
+        Panier updatedPanier = panierService.incrementQuantity(panierId, pieceId);
+        return ResponseEntity.ok(updatedPanier);
+    }
+
+    // Decrement quantity for a piece in the panier
+    @PostMapping("/decrement/{panierId}/{pieceId}")
+    public ResponseEntity<Panier> decrementQuantity(
+            @PathVariable Long panierId,
+            @PathVariable Integer pieceId) {
+        Panier updatedPanier = panierService.decrementQuantity(panierId, pieceId);
+        return ResponseEntity.ok(updatedPanier);
+    }
 
 }
