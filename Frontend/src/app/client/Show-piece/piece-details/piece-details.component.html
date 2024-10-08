@@ -1,13 +1,20 @@
 <app-navbar></app-navbar>
+
 <div class="piece-details-container" *ngIf="piece">
-  <div class="piece-image">
-    <img [src]="piece.image" [alt]="piece.nom">
-  </div>
-  <div class="piece-info">
-    <h1>{{ piece.nom }}</h1>
-    <p class="reference">Reference: {{ piece.reference }}</p>
-    <p class="price">{{ piece.prix | currency:'dh' }}</p>
-    <p class="description">{{ piece.reference }}</p>
-    <button (click)="addToCart(piece.id!)" class="add-to-cart-btn">Add to Cart</button>
+  <div class="piece-details-card">
+    <!-- Image section -->
+    <div class="piece-image">
+      <img [src]="piece.image" [alt]="piece.nom">
+    </div>
+
+    <!-- Info section -->
+    <div class="piece-info">
+      <h1 class="piece-name">{{ piece.nom }}</h1>
+      <p class="reference">Reference: {{ piece.reference }}</p>
+      <p class="price">{{ piece.prix | currency:'dh' }}</p>
+      <p class="reference">{{ piece.reference }}</p>
+      
+      <button (click)="addToCart(piece.id!)" class="add-to-cart-btn">Add to Cart</button>
+    </div>
   </div>
 </div>
