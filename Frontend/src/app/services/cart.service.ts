@@ -133,7 +133,12 @@ decrementQuantity(panierId?: number, pieceId?: number): Observable<any> {
 
 
 
-
+ // Check if a product is in the cart (isProductInPanier)
+ isProductInPanier(panierId: number, productId: number): Observable<boolean> {
+  const headers = this.createAuthorizationHeader();
+  const url = `${this.baseUrl}/${panierId}/contains/${productId}`;
+  return this.http.get<boolean>(url,{headers});
+}
 
 
 

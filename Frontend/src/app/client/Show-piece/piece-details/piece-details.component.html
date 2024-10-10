@@ -14,7 +14,16 @@
       <p class="price">{{ piece.prix | currency:'dh' }}</p>
       <p class="reference">{{ piece.reference }}</p>
       
-      <button (click)="addToCart(piece.id!)" class="add-to-cart-btn">Add to Cart</button>
+    <!-- Add to Cart button, shown if the product is not in the cart -->
+<button *ngIf="!isProductInPanier" (click)="addToCart(piece.id!)" class="add-to-cart-btn">
+  Add to Cart
+</button>
+
+<!-- Go to Cart button, shown if the product is already in the cart -->
+<button *ngIf="isProductInPanier" (click) ="goToCart()" class="go-to-cart-btn">
+  Go to Cart
+</button>
+
     </div>
   </div>
 </div>

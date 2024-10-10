@@ -1,5 +1,6 @@
 package com.backend.Service;
 
+import com.backend.DTO.OrderConfirmationDto;
 import com.backend.Model.Order;
 import com.backend.Model.OrderItem;
 import com.backend.Model.Panier;
@@ -85,4 +86,34 @@ public class PlaceOrderService {
             throw new RuntimeException("An unexpected error occurred while placing the order: " + e.getMessage());
         }
     }
+
+
+
+    public List<OrderConfirmationDto> afterOrder(Long orderId) {
+        // Fetch the order by ID
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found with id: " + orderId));
+
+        // Map order details to OrderConfirmationDto
+        List<OrderConfirmationDto> orderConfirmationDtos = order.getOrderItems().stream()
+                .map(orderItem -> new OrderConfirmationDto(
+                        order.getId(),
+                        order.getOrderDate(),
+                        order.getOrderStatus().name(),
+                        orderItem.getPrice() * orderItem.getQuantity(),
+                        orderItem.getPiece().getId(),
+                        orderItem.getPiece().getNom(),       // Assuming Piece class has a getNom method
+                        orderItem.getPrice(),
+                        orderItem.getQuantity(),
+                        orderItem.getPiece().getImage()      // Assuming Piece class has a getImage method
+                ))
+                .toList();
+
+        return orderConfirmationDtos;
+    }
+
+
+
+
+
 }

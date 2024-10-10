@@ -10,7 +10,6 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200/")
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
-
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
 

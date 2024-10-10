@@ -94,4 +94,11 @@ public class PanierController {
         return ResponseEntity.ok(updatedPanier);
     }
 
+
+    @GetMapping("/{idPanier}/contains/{idProduct}")
+    public ResponseEntity<Boolean> isProductInPanier(@PathVariable Long idPanier, @PathVariable int idProduct) {
+        boolean isInPanier = panierItemService.isProductInPanier(idPanier, idProduct);
+        return ResponseEntity.ok(isInPanier);
+    }
+
 }

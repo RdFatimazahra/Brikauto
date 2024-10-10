@@ -1,5 +1,6 @@
 package com.backend.Controller;
 
+import com.backend.DTO.OrderConfirmationDto;
 import com.backend.Model.Order;
 import com.backend.Service.PlaceOrderService;
 import com.backend.exception.CartEmptyException;
@@ -7,6 +8,8 @@ import com.backend.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -20,6 +23,7 @@ public class OrderControlle {
     public ResponseEntity<Order> placeOrder(@PathVariable int userId) {
         try {
             Order order = placeOrderService.placeOrder(userId);
+
             return ResponseEntity.ok(order);
         } catch (UserNotFoundException e) {
             return ResponseEntity.status(404).body(null); // User not found
@@ -28,6 +32,13 @@ public class OrderControlle {
         } catch (RuntimeException e) {
             return ResponseEntity.status(500).body(null); // Internal server error
         }
+    }
+
+
+    @GetMapping("/{orderId}/confirmation")
+    public ResponseEntity<List<OrderConfirmationDto>> getOrderConfirmation(@PathVariable Long orderId) {
+        List<OrderConfirmationDto> confirmationDetails = placeOrderService.afterOrder(orderId);
+        return ResponseEntity.ok(confirmationDetails);
     }
 
 

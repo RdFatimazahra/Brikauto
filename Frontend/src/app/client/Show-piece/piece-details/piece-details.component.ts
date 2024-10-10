@@ -4,6 +4,7 @@ import { Piece } from 'src/app/interfaces/Piece';
 import { ClientService } from 'src/app/services/client.service';
 import { CartService } from 'src/app/services/cart.service';
 import { AuthenticateService } from 'src/app/services/authenticate-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-piece-details',
@@ -13,12 +14,14 @@ import { AuthenticateService } from 'src/app/services/authenticate-service.servi
 export class PieceDetailsComponent implements OnInit {
   piece: Piece | null = null;
   panierId: number | null = null;
+  isProductInPanier: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private clientService: ClientService,
     private cartService: CartService,
-    private authService: AuthenticateService
+    private authService: AuthenticateService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -26,7 +29,18 @@ export class PieceDetailsComponent implements OnInit {
     if (pieceId) {
       this.loadPieceDetails(+pieceId);
     }
-    this.loadPanierId(); // Load the panier ID when the component initializes
+
+    const userId = this.authService.getId(); // Get user ID once
+    if (userId) {
+      this.getPanierByUserId(userId); // Use new method to load panier ID
+
+      if (pieceId) {
+        // Once the panier ID is loaded, check if the piece is in the panier
+        this.checkPanierOnLoad(userId, +pieceId);
+      }
+    } else {
+      console.error('User ID not found.');
+    }
   }
 
   loadPieceDetails(pieceId: number): void {
@@ -40,21 +54,17 @@ export class PieceDetailsComponent implements OnInit {
     );
   }
 
-  // Load the Panier ID for the current user
-  loadPanierId(): void {
-    const userId = this.authService.getId(); // Get the user ID directly
-    if (userId) {
-      this.cartService.getPanierIdByUserId(userId).subscribe(
-        (panierId) => {
-          this.panierId = panierId;
-        },
-        (error) => {
-          console.error('Error fetching panier ID:', error);
-        }
-      );
-    } else {
-      console.error('User ID not found.');
-    }
+  // Load Panier ID by user ID
+  getPanierByUserId(userId: number): void {
+    this.cartService.getPanierIdByUserId(userId).subscribe(
+      (panierId) => {
+        this.panierId = panierId;
+        console.log('Fetched panier ID:', panierId);
+      },
+      (error) => {
+        console.error('Error fetching panier ID:', error);
+      }
+    );
   }
 
   addToCart(pieceId: number): void {
@@ -62,7 +72,7 @@ export class PieceDetailsComponent implements OnInit {
       this.cartService.addToCart(this.panierId, pieceId, 1).subscribe(
         () => {
           console.log('Piece added to cart');
-          // Optionally, you could emit an event or update the cart count in the navbar
+          // Optionally update UI or emit event
         },
         (error) => {
           console.error('Error adding to cart:', error);
@@ -72,4 +82,38 @@ export class PieceDetailsComponent implements OnInit {
       console.error('Panier ID is not available.');
     }
   }
+
+  checkPanierOnLoad(userId: number, pieceId: number): void {
+    this.cartService.getPanierIdByUserId(userId).subscribe(
+      (panierId) => {
+        this.panierId = panierId;
+        if (panierId) {
+          this.checkPanier(panierId, pieceId);
+        }
+      },
+      (error) => {
+        console.error('Error fetching panier ID:', error);
+      }
+    );
+  }
+
+  checkPanier(panierId: number, pieceId: number): void {
+    this.cartService.isProductInPanier(panierId, pieceId).subscribe(
+      (isInPanier: boolean) => {
+        this.isProductInPanier = isInPanier;
+        console.log(`Is the piece in the panier: ${isInPanier}`);
+      },
+      (error) => {
+        console.error('Error checking if piece is in panier:', error);
+      }
+    );
+  }
+
+
+
+  goToCart(){
+      this.router.navigate(['/cart'])
+  }
+
+
 }

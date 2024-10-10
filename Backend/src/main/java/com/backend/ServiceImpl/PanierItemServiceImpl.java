@@ -80,4 +80,19 @@ public class PanierItemServiceImpl {
     }
 
 
+    public boolean isProductInPanier(Long idPanier, int idProduct) {
+        // Find the panier by ID
+        Optional<Panier> panierOpt = panierRepository.findById(idPanier);
+
+        if (panierOpt.isPresent()) {
+            Panier panier = panierOpt.get();
+
+            // Check if any PanierItem in the panier has a piece with the given idProduct
+            return panier.getItems().stream()
+                    .anyMatch(item -> item.getPiece().getId() == idProduct);
+        }
+
+        return false;
+    }
+
 }
