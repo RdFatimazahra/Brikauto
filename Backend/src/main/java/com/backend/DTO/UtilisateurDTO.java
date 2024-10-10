@@ -6,7 +6,7 @@ import java.util.List;
 
 @Data
 public class UtilisateurDTO extends PersonneDTO {
-    private List<CommandeDto> commandes;
+//    private List<CommandeDto> commandes;
     private PanierDto panier;
 
 }

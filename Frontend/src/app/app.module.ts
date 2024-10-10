@@ -24,6 +24,7 @@ import { ShowPieceComponent } from './client/Show-piece/show-piece/show-piece.co
 import { PieceDetailsComponent } from './client/Show-piece/piece-details/piece-details.component';
 import { CartComponent } from './client/cart/cart.component';
 import { HeroSliderComponent } from './home/hero-slider/hero-slider.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 // Function to retrieve the token
 export function tokenGetter() {
@@ -44,6 +45,7 @@ export function tokenGetter() {
     PieceDetailsComponent,
     CartComponent,
     HeroSliderComponent,
+    RegisterComponent,
 
   ],
   imports: [

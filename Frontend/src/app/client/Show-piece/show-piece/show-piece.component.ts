@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CartItem } from 'src/app/interfaces/CartItem';
+import { CartItems } from 'src/app/interfaces/CartItems';
 import { Piece } from 'src/app/interfaces/Piece';
 import { ClientService } from 'src/app/services/client.service';
 import { CartService } from 'src/app/services/cart.service';
@@ -51,20 +51,21 @@ export class ShowPieceComponent implements OnInit {
     }
   }
 
-  loadCart(): void {
-    this.clientService.getCart().subscribe(
-      (cartItems: CartItem[]) => {
-        this.cart = cartItems.reduce((acc: { [key: number]: number }, item: CartItem) => {
-          acc[item.pieceId] = item.quantity;
-          return acc;
-        }, {});
-        this.updateCartItemCount();
-      },
-      (error) => {
-        console.error('Error fetching cart:', error);
-      }
-    );
-  }
+    loadCart(): void {
+      this.clientService.getCart().subscribe(
+        (cartItems: CartItems[]) => {
+          this.cart = cartItems.reduce((acc: { [key: number]: number }, item: CartItems) => {
+            if (item.pieceId && item.pieceId) { // Ensure piece and its id exist
+              acc[item.pieceId] = item.quantite; // Store pieceId as key and quantite as value
+            }            return acc;
+          }, {});
+          this.updateCartItemCount();
+        },
+        (error) => {
+          console.error('Error fetching cart:', error);
+        }
+      );
+    }
 
   getUserIdAndPanier() {
     

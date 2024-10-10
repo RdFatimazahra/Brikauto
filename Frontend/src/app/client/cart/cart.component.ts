@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartItems } from 'src/app/interfaces/CartItems';
+import { Piece } from 'src/app/interfaces/Piece';
 import { AuthenticateService } from 'src/app/services/authenticate-service.service';
 import { CartService } from 'src/app/services/cart.service';
 import { OrderService } from 'src/app/services/order.service';
@@ -12,7 +13,10 @@ import { OrderService } from 'src/app/services/order.service';
 export class CartComponent implements OnInit {
 
   cartItems: CartItems[] = [];
+  piece: Piece[]=[];
   errorMessage: string | null = null;
+  idpaner?: number;
+  // idpiece?: number;
 
   constructor(
     private cartService: CartService,
@@ -29,10 +33,11 @@ export class CartComponent implements OnInit {
 
     if (userId) {
       // Fetch cart items based on user ID
+      this.getPanierByUserId(userId),
       this.cartService.getPanierItemsByUtilisateurId(userId).subscribe(
         (items) => {
           console.log('Fetched cart items:', items); 
-          this.cartItems = items; // Assign fetched items to cartItems
+          this.cartItems = items; // Assign fetched items to cartItems 
         },
         error => {
           this.errorMessage = 'Failed to load cart items.';
@@ -44,9 +49,74 @@ export class CartComponent implements OnInit {
     }
   }
 
+ //GetPanierByIdUser
+  getPanierByUserId(userId: number): void {
+    this.cartService.getPanierIdByUserId(userId).subscribe(
+      (panierId) => {
+        console.log('Fetched panier ID:', panierId);
+        this.idpaner = panierId;
+      },
+      error => {
+        console.error('Error fetching panier ID:', error);
+      }
+    );
+  }
 
+  //IncreaseQuantity:::
+  increaseQuantity(item: CartItems): void {
+    const userId = this.authService.getId();
+    
+    if (userId ) {
+      // Proceed if the item and user are valid
+      this.cartService.incrementQuantity(this.idpaner, item.pieceId).subscribe(
+        ()=>{
+          console.log("done")
+          this.loadCartItems();
+        }, error =>{
+          console.log('error',error)
+          this.loadCartItems();
+        }
+        
+        
+      );
 
+    } else {
+      if (!userId) {
+        this.errorMessage = 'User not logged in.';
+      } else {
+        this.errorMessage = 'Invalid item.';
+        console.error('Invalid item properties:', this.errorMessage);
+      }
+    }
+  }
+  
+  
+  
 
+  //DecreaseQuantity:::
+  decreaseQuantity(item: CartItems): void {
+    if (item.quantite > 1) {
+      const userId = this.authService.getId();
+      if (userId && item.pieceId) {
+        this.cartService.decrementQuantity(this.idpaner, item.pieceId).subscribe(
+          ()=>{
+            console.log("done")
+            this.loadCartItems();
+          }, error =>{
+            console.log('error',error)
+            this.loadCartItems();
+          }
+          
+          
+        );
+      } else {
+        this.errorMessage = 'User not logged in or invalid item.';
+      }
+    } else {
+      this.errorMessage = 'Quantity cannot be less than 1.';
+    }
+  }
+//Checkout :::
   checkout(){
     const userId = this.authService.getId(); 
     if (userId) {

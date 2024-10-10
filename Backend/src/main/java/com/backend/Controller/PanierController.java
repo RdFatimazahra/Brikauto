@@ -1,5 +1,6 @@
 package com.backend.Controller;
 
+import com.backend.DTO.PanierDto;
 import com.backend.DTO.PanierItemsDto;
 import com.backend.Model.Panier;
 import com.backend.Model.PanierItem;
@@ -77,7 +78,10 @@ public class PanierController {
     public ResponseEntity<Panier> incrementQuantity(
             @PathVariable Long panierId,
             @PathVariable Integer pieceId) {
-        Panier updatedPanier = panierService.incrementQuantity(panierId, pieceId);
+        PanierDto panierDto= new PanierDto();
+        panierDto.setIdPanier(panierId);
+        panierDto.setPieceId(pieceId);
+        Panier updatedPanier = panierService.incrementQuantity(panierDto);
         return ResponseEntity.ok(updatedPanier);
     }
 

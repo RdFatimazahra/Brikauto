@@ -9,6 +9,12 @@ import java.util.List;
 public class PanierDto {
     private Long idPanier;
     private Long utilisateurId;
-    private List<PanierItemDto> items;
+    private int pieceId;
+    private List<PanierItemsDto> items;
     private Double total;
+    private String pieceImageLink;
+    private int quantite;
+    private String pieceName;
+    private Double piecePrice;
 }
+

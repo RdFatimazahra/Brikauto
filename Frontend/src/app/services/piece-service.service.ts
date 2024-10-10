@@ -19,8 +19,7 @@ export class ListPieceService {
 
   // Suppression d'une pièce par ID
   deletePiece(id: number): Observable<void> {
-    const headers = this.createAuthorizationHeader();
-    return this.http.delete<void>(`${BASE_URL}/${id}`, { headers });
+    return this.http.delete<void>(`${BASE_URL}/${id}`);
   }
 
   

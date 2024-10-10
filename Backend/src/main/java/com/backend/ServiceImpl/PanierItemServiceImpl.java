@@ -69,6 +69,7 @@ public class PanierItemServiceImpl {
         List<PanierItem> panierItems = panier.getItems();
         return panierItems.stream()
                 .map(item -> new PanierItemsDto(
+                        item.getPiece().getId(),
                         item.getPiece().getImage(),
                         item.getPiece().getNom(),
                         item.getPiece().getPrix(),

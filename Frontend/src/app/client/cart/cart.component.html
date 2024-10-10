@@ -30,13 +30,9 @@
                 <td class="product-name">{{ item.pieceName }}</td>
                 <td class="unit-price">{{ item.piecePrice | currency }}</td>
                 <td class="quantity">
-                    <!-- <button (click)="decreaseQuantity(item)">-</button> -->
-                    <button >-</button>
-
+                    <button (click)="decreaseQuantity(item)">-</button>
                     <span>{{ item.quantite }}</span>
-                    <!-- <button (click)="increaseQuantity(item)">+</button> -->
-                    <button >+</button>
-
+                    <button (click)="increaseQuantity(item)">+</button>
                 </td>
                 <td class="total-price">{{ item.totalPrice | currency }}</td>
             </tr>

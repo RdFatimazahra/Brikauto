@@ -63,7 +63,6 @@ public class PanierServiceImpl {
 
 
 
-
     public Integer getPanierIdByUserId(int userId) {
         // Retrieve the user from the repository
         Utilisateur utilisateur = utilisateurRepository.findById(userId).orElseThrow(
@@ -91,7 +90,9 @@ public class PanierServiceImpl {
     }
 
     // Increment quantity of the piece in the panier
-    public Panier incrementQuantity(Long panierId, Integer pieceId) {
+    public Panier incrementQuantity(PanierDto panierDto) {
+        Long panierId=panierDto.getIdPanier();
+        int pieceId= panierDto.getPieceId();
         Panier panier = panierRepository.findById(panierId).orElseThrow(
                 () -> new RuntimeException("Panier not found with id " + panierId)
         );

@@ -9,6 +9,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ShowPieceComponent } from './client/Show-piece/show-piece/show-piece.component';
 import { PieceDetailsComponent } from './client/Show-piece/piece-details/piece-details.component';
 import { CartComponent } from './client/cart/cart.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 const routes: Routes = [
     { path: 'dashboard', component: DashbordComponent, children: [
@@ -17,7 +18,8 @@ const routes: Routes = [
     ] },
     { path: 'list-piece', component: PieceListComponent },
     { path: 'login', component: LoginComponent },
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: 'register', component: RegisterComponent},
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
     {path: 'add-piece', component: AddPieceComponent},
     {path: 'home', component: HomepageComponent},
     {path: 'navbar', component: NavbarComponent},

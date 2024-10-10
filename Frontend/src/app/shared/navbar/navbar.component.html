@@ -1,9 +1,16 @@
 <nav class="navbar">
   <div class="container">
-    <a href="/" class="logo">AutoParts</a>
+    <img src="/assets/2.png" alt="logo" width="150px" />
+    <!-- <a href="/" class="logo">AutoParts</a> -->
     <ul class="nav-list">
       <li *ngFor="let item of navItems">
         <a [routerLink]="item.link" class="nav-link">{{ item.label }}</a>
+      </li>
+      <!-- Login link with user icon -->
+      <li class="login-item">
+        <a [routerLink]="loginLink" class="nav-link">
+          <i class="fas fa-user"></i> Compte
+        </a>
       </li>
       <!-- Cart link with cart icon -->
       <li class="cart-item">

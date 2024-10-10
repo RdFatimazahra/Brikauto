@@ -22,7 +22,7 @@ export class AuthenticateService {
   constructor(private http: HttpClient,private jwtHelper:JwtHelperService,  private router: Router) { }
 
   register(signRequest: any): Observable<Jwt> {
-    return this.http.post<Jwt>(BASE_URL + '/register', signRequest);
+    return this.http.post<Jwt>(BASE_URL + 'registerUser', signRequest);
   }
 
   // registerFournisseur(signRequest: any): Observable<Jwt> {
