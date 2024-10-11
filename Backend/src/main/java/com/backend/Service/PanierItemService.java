@@ -1,14 +1,16 @@
-//package com.backend.Service;
-//
-//import com.backend.DTO.PanierItemDto;
-//import com.backend.Model.Panier;
-//import com.backend.Model.Utilisateur;
-//
-//public interface PanierItemService {
-//    void addItemToPanier(Utilisateur utilisateur, int pieceId, int quantite);
-//    Panier getPanierForUser(Utilisateur utilisateur);
-//    void removeItemFromPanier(Utilisateur utilisateur, Long orderItemId);
-//    void clearPanier(Utilisateur utilisateur);
-//
-//
-//}
+package com.backend.Service;
+
+
+import com.backend.DTO.PanierItemsDto;
+
+import java.util.List;
+
+public interface PanierItemService {
+
+    // Method to get all panier items by the utilisateur ID
+    List<PanierItemsDto> getPanierItemsByUtilisateurId(int idUtilisateur);
+
+    // Method to check if a product is already in the panier
+    boolean isProductInPanier(Long idPanier, int idProduct);
+
+}

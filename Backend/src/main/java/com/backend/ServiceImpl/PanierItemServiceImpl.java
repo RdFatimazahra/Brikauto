@@ -7,6 +7,7 @@ import com.backend.Model.Utilisateur;
 import com.backend.Repository.PanierItemRepository;
 import com.backend.Repository.PanierRepository;
 import com.backend.Repository.UtilisateurRepository;
+import com.backend.Service.PanierItemService;
 import com.backend.exception.PanierNotFoundException;
 import com.backend.exception.UtilisateurNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class PanierItemServiceImpl {
+public class PanierItemServiceImpl implements PanierItemService {
 
     private final PanierItemRepository panierItemRepository;
     private final PanierRepository panierRepository;

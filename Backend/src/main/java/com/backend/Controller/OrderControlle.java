@@ -2,7 +2,7 @@ package com.backend.Controller;
 
 import com.backend.DTO.OrderConfirmationDto;
 import com.backend.Model.Order;
-import com.backend.Service.PlaceOrderService;
+import com.backend.ServiceImpl.PlaceOrderServiceImpl;
 import com.backend.exception.CartEmptyException;
 import com.backend.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -21,7 +19,7 @@ public class OrderControlle {
 
 
     @Autowired
-    private PlaceOrderService placeOrderService;
+    private PlaceOrderServiceImpl placeOrderService;
 
 //    @PostMapping("/place/{userId}")
 //    public ResponseEntity<Order> placeOrder(@PathVariable int userId) {
