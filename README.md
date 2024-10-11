@@ -1,14 +1,29 @@
 # BrikAuto
 
-BrikAuto est votre compagnon numérique ultime pour la gestion et l'entretien de votre véhicule. Conçue pour simplifier la vie des propriétaires de voitures au Maroc, cette application tout-en-un combine la puissance de la technologie moderne avec la praticité du "bricolage" automobile.
+BrikAuto est votre plateforme e-commerce de confiance pour l'achat de pièces automobiles au Maroc. Conçue pour simplifier la vie des propriétaires de voitures et des mécaniciens, cette application offre une expérience d'achat en ligne fluide et intuitive pour toutes vos pièces auto.
 
 ## Caractéristiques principales :
 
-- 🚗 Gestion complète de l'historique d'entretien de votre véhicule
-- 🔧 Recherche et achat de pièces détachées compatibles
-- 📅 Rappels intelligents pour les entretiens et visites techniques
-- 💰 Comparaison des prix et des fournisseurs de pièces auto
-- 📊 Tableau de bord personnalisé pour suivre l'état de votre véhicule
+- 🛒 Interface utilisateur intuitive pour une expérience d'achat simplifiée
+- 🔍 Recherche avancée de pièces compatibles avec votre véhicule
+- 💰 Comparaison facile des prix entre différents fournisseurs
+- 📦 Suivi en temps réel de la disponibilité des stocks
+- 🚚 Options de livraison flexibles à travers le Maroc
+
+## Pour les clients :
+
+- Créez un compte et ajoutez les détails de votre véhicule pour une recherche de pièces personnalisée
+- Parcourez un vaste catalogue de pièces auto de qualité
+- Ajoutez facilement des produits à votre panier
+- Passez des commandes en toute simplicité
+
+## Pour les administrateurs :
+
+- Gérez efficacement le catalogue de produits (ajout, modification, suppression)
+- Surveillez et mettez à jour les niveaux de stock en temps réel
+- Traitez les commandes et gérez les expéditions
+
+BrikAuto vise à révolutionner l'achat de pièces auto au Maroc en offrant une plateforme centralisée, fiable et facile à utiliser. Que vous soyez un propriétaire de voiture à la recherche d'une pièce spécifique ou un mécanicien ayant besoin d'un approvisionnement régulier, BrikAuto est là pour répondre à tous vos besoins en pièces automobiles.
 
 Que vous soyez un passionné d'automobile ou simplement à la recherche d'une solution pratique pour maintenir votre véhicule en parfait état, BrikAuto est l'outil qu'il vous faut. Simplifiez votre expérience automobile dès aujourd'hui !
 
