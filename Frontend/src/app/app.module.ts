@@ -26,6 +26,10 @@ import { CartComponent } from './client/cart/cart.component';
 import { HeroSliderComponent } from './home/hero-slider/hero-slider.component';
 import { RegisterComponent } from './auth/register/register.component';
 
+
+import { CommonModule } from '@angular/common';
+import { OrderConfirmationComponent } from './pages/order/order-confirmation/order-confirmation.component';
+
 // Function to retrieve the token
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -46,6 +50,7 @@ export function tokenGetter() {
     CartComponent,
     HeroSliderComponent,
     RegisterComponent,
+    OrderConfirmationComponent
 
   ],
   imports: [
@@ -57,6 +62,7 @@ export function tokenGetter() {
     ReactiveFormsModule,
     FormsModule,
     MatDialogModule,
+    CommonModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

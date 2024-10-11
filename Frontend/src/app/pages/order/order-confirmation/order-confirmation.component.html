@@ -1,0 +1,27 @@
+<body>
+    <div class="order-confirmation">
+        <div *ngIf="isLoading" class="loading">Loading order details...</div>
+        <div *ngIf="error" class="error">{{error}}</div>
+        <div *ngIf="!isLoading && !error">
+            <h1>Order Confirmation</h1>
+            <div class="order-info">
+                <p><strong>Order ID:</strong> {{orderId}}</p>
+                <p><strong>Order Date:</strong> {{ orderDate | date: 'MMMM d, y, h:mm a' }}</p>
+                <p><strong>Status:</strong> {{orderStatus}}</p>
+            </div>
+            <div class="order-items">
+                <div *ngFor="let item of orderDetails" class="item">
+                    <img [src]="item.pieceImage" [alt]="item.pieceName">
+                    <div class="item-details">
+                        <div class="item-name">{{item.pieceName}}</div>
+                        <div class="item-price">Price: ${{item.piecePrice}}</div>
+                        <div class="item-quantity">Quantity: {{item.quantity}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="total-price">
+                Total: ${{totalPrice}}
+            </div>
+        </div>
+    </div>
+</body>

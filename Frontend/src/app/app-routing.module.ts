@@ -10,6 +10,7 @@ import { ShowPieceComponent } from './client/Show-piece/show-piece/show-piece.co
 import { PieceDetailsComponent } from './client/Show-piece/piece-details/piece-details.component';
 import { CartComponent } from './client/cart/cart.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { OrderConfirmationComponent } from './pages/order/order-confirmation/order-confirmation.component';
 
 const routes: Routes = [
     { path: 'dashboard', component: DashbordComponent, children: [
@@ -25,7 +26,9 @@ const routes: Routes = [
     {path: 'navbar', component: NavbarComponent},
     {path: 'show', component: ShowPieceComponent},
     {path:'piece-details/:id', component: PieceDetailsComponent},
-    {path: 'cart' , component: CartComponent}
+    {path: 'cart' , component: CartComponent},
+    // {path:'orderConfirmation/:id',component:OrderConfirmationComponent}
+    {path:'orderConfirme/:id', component:OrderConfirmationComponent}
 ];
 
 @NgModule({
