@@ -33,38 +33,38 @@ pipeline {
                 }
             }
         }
-       stage('Build Docker Image & Push') {
-           steps {
-               dir('Backend') {
-                   script {
-                       try {
-                           bat 'docker context use default'
+//        stage('Build Docker Image & Push') {
+//            steps {
+//                dir('Backend') {
+//                    script {
+//                        try {
+//                            bat 'docker context use default'
+//
+//                            withCredentials([usernamePassword(credentialsId: 'filrouge', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+//                                bat "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+//                            }
+//
+//                            def imageTag = env.TAG_VERSION ?: 'latest'
+//                            def dockerImage = docker.build("fatimazahra9/brikauto:${imageTag}")
+//
+//                            docker.withRegistry('https://index.docker.io/v1/', 'filrouge') {
+//                                dockerImage.push()
+//                            }
+//                        } catch (Exception e) {
+//                            error "Échec de la construction ou du push Docker : ${e.message}"
+//                        }
+//                    }
+//                }
+//            }
+//        }
 
-                           withCredentials([usernamePassword(credentialsId: 'filrouge', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-                               bat "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                           }
-
-                           def imageTag = env.TAG_VERSION ?: 'latest'
-                           def dockerImage = docker.build("fatimazahra9/brikauto:${imageTag}")
-
-                           docker.withRegistry('https://index.docker.io/v1/', 'filrouge') {
-                               dockerImage.push()
-                           }
-                       } catch (Exception e) {
-                           error "Échec de la construction ou du push Docker : ${e.message}"
-                       }
-                   }
-               }
-           }
-       }
-
-       stage('Deploy with Docker Compose') {
-           steps {
-               dir('Backend')  {
-                   bat 'docker-compose up -d'
-               }
-           }
-       }
+//        stage('Deploy with Docker Compose') {
+//            steps {
+//                dir('Backend')  {
+//                    bat 'docker-compose up -d'
+//                }
+//            }
+//        }
 
     }
 }

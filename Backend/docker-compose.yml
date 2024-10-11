@@ -1,4 +1,34 @@
-version: '3.8'
+#version: '3.8'
+#
+#services:
+#  psql-db:
+#    image: postgres:13
+#    container_name: psql-db
+#    restart: always
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: admin
+#      POSTGRES_DB: brikauto
+#    ports:
+#      - '5432:5432'
+#
+#  projet:
+#    image: brikauto:latest
+#    ports:
+#      - '8082:8082'
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://psql-db:5432/brikauto
+#      SPRING_DATASOURCE_USERNAME: postgres
+#      SPRING_DATASOURCE_PASSWORD: admin
+#      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+#    depends_on:
+#      - psql-db
+#
+#
+
+
+
+version: '3.8'  # Optional, can be removed
 
 services:
   psql-db:
@@ -13,7 +43,9 @@ services:
       - '5432:5432'
 
   projet:
-    image: fatimazahra9/brikauto:latest
+    build:  # This section builds the image using the Dockerfile
+      context: .  # Directory containing the Dockerfile
+      dockerfile: Dockerfile  # Specify the name if it's not named "Dockerfile"
     ports:
       - '8082:8082'
     environment:
@@ -23,5 +55,3 @@ services:
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
     depends_on:
       - psql-db
-
-
