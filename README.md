@@ -6,7 +6,6 @@ BrikAuto est votre plateforme e-commerce de confiance pour l'achat de pièces au
 
 - 🛒 Interface utilisateur intuitive pour une expérience d'achat simplifiée
 - 🔍 Recherche avancée de pièces compatibles avec votre véhicule
-- 💰 Comparaison facile des prix entre différents fournisseurs
 - 📦 Suivi en temps réel de la disponibilité des stocks
 - 🚚 Options de livraison flexibles à travers le Maroc
 
