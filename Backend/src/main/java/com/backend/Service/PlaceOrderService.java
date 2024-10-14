@@ -10,6 +10,9 @@ public interface PlaceOrderService {
     // Method to place an order for a specific user
     Order placeOrder(int userId);
 
+    //Get All orders:
+    List<OrderConfirmationDto> getAllOrderConfirmations();
+
     // Method to retrieve order confirmation details after placing an order
     List<OrderConfirmationDto> afterOrder(Long orderId);
 }

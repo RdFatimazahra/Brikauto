@@ -26,6 +26,13 @@ public class Panier {
 
     private Double total;
 
+
+
+
+
+
+
+
 //    public Double getTotal() {
 //        return total;
 //    }

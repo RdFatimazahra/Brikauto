@@ -28,6 +28,11 @@ public class PanierItem {
     private  double totalPrice;
 
 
+
+
+
+
+
     public Double getTotal() {
         return quantite * piece.getPrix();
     }

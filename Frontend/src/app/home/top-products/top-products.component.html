@@ -1,0 +1,18 @@
+<section class="top-products">
+    <div class="container">
+      <h2>Top Products</h2>
+      <p class="description">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <div class="product-grid">
+        <div class="product-card" *ngFor="let product of products">
+          <img [src]="product.image" [alt]="product.name">
+          <h3>{{ product.name }}</h3>
+          <div class="rating">
+            <span *ngFor="let star of getStars(product.rating)" [class.half-star]="star === '½'">
+              {{ star === '½' ? '★' : star }}
+            </span>
+          </div>
+          <p class="price">{{ product.price.toFixed(2) }} dh</p>
+        </div>
+      </div>
+    </div>
+  </section>

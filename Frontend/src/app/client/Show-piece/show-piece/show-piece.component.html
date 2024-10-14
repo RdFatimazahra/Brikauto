@@ -8,8 +8,8 @@
       <p class="description">{{ part.reference }}</p>
       <p class="price">{{ part.prix | currency:'dh' }}</p>
       <div class="button-group">
-        <button (click)="addToCart(part.id!)" class="cart-button">
-          Add to Cart
+        <button (click)="showPieceDetails(part)" class="cart-button">
+          View 
         </button>
       </div>
     </div>

@@ -1,6 +1,6 @@
 .navbar {
     background-color: #3468C0;
-    padding: 1rem 0;
+    padding: 0rem 0;
   }
   
   .container {
@@ -10,13 +10,20 @@
     justify-content: space-between;
     align-items: center;
   }
-  
+
   .logo {
-    color: #E9F6FF;
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-decoration: none;
-  }
+  width: 80px;
+  height: auto; /* Adjust this value to match your navbar height */
+  margin-right: 20px; /* Add some space between logo and menu items */
+  vertical-align: middle; /* Align vertically within the navbar */
+}
+  
+  // .logo {
+  //   color: #E9F6FF;
+  //   font-size: 1.5rem;
+  //   font-weight: bold;
+  //   text-decoration: none;
+  // }
   
   .nav-list {
     display: flex;
@@ -33,7 +40,7 @@
   }
   
   .nav-link:hover {
-    color: #FE7A36;
+    color: #FECD70;
   }
 
   .navbar {

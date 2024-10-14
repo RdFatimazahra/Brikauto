@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 interface Slide {
   title: string;
   subtitle: string;
+  imageUrl: string;
 }
 
 @Component({
@@ -15,16 +16,19 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
   slides: Slide[] = [
     {
       title: 'Find the Right Part for Your Vehicle',
-      subtitle: 'Quality auto parts at competitive prices'
+      subtitle: 'Quality auto parts at competitive prices',
+      imageUrl:'assets/67354.jpg'
     },
-    {
-      title: 'Upgrade Your Performance',
-      subtitle: 'Boost your car\'s potential with our parts'
-    },
-    {
-      title: 'Restore Your Classic',
-      subtitle: 'Authentic parts for vintage vehicles'
-    }
+    // {
+    //   title: 'Upgrade Your Performance',
+    //   subtitle: 'Boost your car\'s potential with our parts',
+    //   imageUrl:'assets/67354.jpg'
+    // },
+    // {
+    //   title: 'Restore Your Classic',
+    //   subtitle: 'Authentic parts for vintage vehicles',
+    //   imageUrl:'assets/67354.jpg'
+    // }
   ];
 
   currentSlide = 0;
@@ -34,6 +38,7 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.startSlideShow();
+    
   }
 
   ngOnDestroy() {

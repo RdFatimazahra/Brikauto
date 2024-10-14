@@ -15,7 +15,7 @@
       <p class="reference">{{ piece.reference }}</p>
       
     <!-- Add to Cart button, shown if the product is not in the cart -->
-<button *ngIf="!isProductInPanier" (click)="addToCart(piece.id!)" class="add-to-cart-btn">
+<button *ngIf="!isProductInPanier" (click)="addToCart(piece.id!)" class="add-to-cart-btn" routerLink="/cart">
   Add to Cart
 </button>
 

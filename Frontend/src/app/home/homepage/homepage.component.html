@@ -1,8 +1,10 @@
 <div class="home-container">
   <app-navbar></app-navbar>
-  <app-hero-slider></app-hero-slider>
+  <!-- <app-hero-slider></app-hero-slider> -->
+   <app-slider></app-slider>
 
   <main class="main-content">
+  
     <!-- <section class="hero">
       <div class="hero-content">
         <h1>Find the Right Part for Your Vehicle</h1>
@@ -10,8 +12,9 @@
         <button (click)="navigateToPartsList()" class="search-button">Search Parts</button>
       </div>
     </section> -->
+    <app-how-it-works></app-how-it-works>
     <section class="categories">
-      <h2>Featured Categories</h2>
+      <h2> Categories</h2>
       <div class="category-grid">
         <div *ngFor="let category of categories" class="category-card">
           <img [src]="category.image" [alt]="category.name">
@@ -19,5 +22,8 @@
         </div>
       </div>
     </section>
+    <app-top-products></app-top-products>
+   
   </main>
+  <app-footer></app-footer>
 </div>

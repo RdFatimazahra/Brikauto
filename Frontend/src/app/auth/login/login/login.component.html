@@ -1,4 +1,4 @@
- <section class="vh-100">
+ <!-- <section class="vh-100">
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-7 text-black d-flex align-items-center justify-content-center">
@@ -53,4 +53,52 @@
     </div>
   </section>
 
- 
+  -->
+  <div class="login-container">
+    <div class="login-content">
+      <div class="login-image">
+        <img src="assets/hero-thumb.png" alt="Tradesman ready for work">
+      </div>
+      <div class="login-form">
+        <h2>Log in to your account</h2>
+        <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+          <div *ngIf="loginError" class="error-message">
+            {{ loginError }}
+          </div>
+  
+          <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="email" id="email" formControlName="email" placeholder="Enter your email">
+            <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)" class="error-message">
+              <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</small>
+              <small *ngIf="loginForm.get('email')?.errors?.['email']">Please enter a valid email address</small>
+            </div>
+            <div *ngIf="emailError" class="error-message">
+              <small>{{ emailError }}</small>
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" formControlName="password" placeholder="Enter your password">
+            <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="error-message">
+              <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</small>
+            </div>
+            <div *ngIf="passwordError" class="error-message">
+              <small>{{ passwordError }}</small>
+            </div>
+          </div>
+  
+          <div class="form-group checkbox">
+            <input type="checkbox" id="remember" formControlName="remember">
+            <label for="remember">Remember me</label>
+          </div>
+  
+          <button type="submit" [disabled]="loginForm.invalid">Login</button>
+        </form>
+        <p class="register-link">
+          Don't have an account? <a routerLink="/register">Sign up</a>
+        </p>
+      </div>
+    </div>
+  </div>

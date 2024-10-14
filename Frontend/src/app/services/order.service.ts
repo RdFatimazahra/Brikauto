@@ -33,6 +33,11 @@ export class OrderService {
     return this.http.get<OrderConfirmation[]>(`http://localhost:8082/api/orders/${orderId}/confirmation`, { headers });
   }
   
+    // New method to get all orders
+    getAllOrders(): Observable<OrderConfirmation[]> {
+      const headers = this.createAuthorizationHeader();
+      return this.http.get<OrderConfirmation[]>(`http://localhost:8082/api/orders/all`, { headers });
+    }
 
 
   private createAuthorizationHeader(): HttpHeaders {

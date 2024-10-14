@@ -13,21 +13,20 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
 
   constructor(
-    private authservice : AuthenticateService,
+    private authservice: AuthenticateService,
     private fb: FormBuilder,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      nom: ['', [Validators.required]],  // Full name
-      email: ['', [Validators.required, Validators.email]],  // Email
-      password: ['', [Validators.required]],  // Password
-      confirmPassword: ['', [Validators.required]]  // Confirm Password
+      nom: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]]
     }, { validator: this.passwordMatchValidator });
   }
 
-  // Validator to check if the password and confirm password fields match
   passwordMatchValidator(formGroup: FormGroup) {
     const password = formGroup.get('password')?.value;
     const confirmPassword = formGroup.get('confirmPassword')?.value;
@@ -39,20 +38,18 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  // Method to handle form submission
   submitForm() {
     if (this.registerForm.valid) {
       console.log(this.registerForm.value);
       this.authservice.register(this.registerForm.value).subscribe(
-        (response: any) => {  // Use 'any' for now, but ideally define a specific type
+        (response: any) => {
           console.log('Registration successful:', response);
           this.router.navigate(['/login']);
         },
-        (error: any) => {  // Also type the error parameter
+        (error: any) => {
           console.error('Registration failed:', error);
         }
       );
     }
-  
   }
 }

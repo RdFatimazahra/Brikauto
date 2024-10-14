@@ -63,5 +63,15 @@ public class OrderControlle {
         return ResponseEntity.ok(confirmationDetails);
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<OrderConfirmationDto>> getAllOrders() {
+        try {
+            List<OrderConfirmationDto> orders = placeOrderService.getAllOrderConfirmations();
+            return ResponseEntity.ok(orders);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
 
 }

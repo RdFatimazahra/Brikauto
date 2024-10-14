@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
 })
 export class HomepageComponent {
   categories = [
-    { name: 'Engine Parts', image: 'assets/engine.png' },
-    { name: 'Brakes', image: 'assets/brakes.png' },
-    { name: 'Suspension', image: 'assets/suspension.png' },
-    { name: 'Electrical', image: 'assets/electrical.png' },
+    { name: 'Engine Parts', image: 'assets/engine.jpg' },
+    { name: 'Brakes', image: 'assets/brakes.jpg' },
+    { name: 'Suspension', image: 'assets/suspension.jpg' },
+    { name: 'Electrical', image: 'assets/electricaal.jpg' },
   ];
 
   constructor(private router: Router) {}

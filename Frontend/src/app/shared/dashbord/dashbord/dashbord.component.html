@@ -1,4 +1,4 @@
-<div class="dashboard-wrapper">
+<!-- <div class="dashboard-wrapper">
     <button id="sidebarToggle" class="btn btn-primary d-md-none" (click)="toggleSidebar()">
       <i class="bi bi-list"></i>
     </button>
@@ -19,8 +19,8 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="dashboard/Promos" routerLinkActive="active">
-            <i class="bi bi-tools"></i> Promos
+          <a class="nav-link" routerLink="/showOrders" routerLinkActive="active">
+            <i class="bi bi-tools"></i> Orders
           </a>
         </li>
         <li class="nav-item">
@@ -49,4 +49,49 @@
         <router-outlet></router-outlet>
       </div>
     </main>
+  </div> -->
+
+  <div class="dashboard-wrapper">
+    <button id="sidebarToggle" class="btn btn-primary d-md-none" (click)="toggleSidebar()">
+      <i class="bi bi-list"></i>
+    </button>
+  
+    <nav id="sidebar" class="bg-primary text-white" [class.active]="isSidebarActive">
+      <div class="sidebar-header">
+        <img src="/assets/autolg.png" alt="logo" class="logo">
+        <!-- <h3>AutoParts</h3> -->
+      </div>
+      <ul class="nav flex-column flex-grow-1">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="add-piece" routerLinkActive="active">
+            <i class="bi bi-person"></i> Ajouter piece
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="list-piece" routerLinkActive="active">
+            <i class="bi bi-people"></i> Pieces
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="showOrders" routerLinkActive="active">
+            <i class="bi bi-tools"></i> Commandes
+          </a>
+        </li>
+      </ul>
+      <div class="sidebar-footer">
+        <button class="btn btn-logout" (click)="onLogout()">
+          <i class="bi bi-box-arrow-right"></i> Logout
+        </button>
+      </div>
+    </nav>
+  
+    <main class="content">
+      <header class="content-header">
+        <h1>Welcome to your Dashboard</h1>
+      </header>
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </main>
   </div>
+  

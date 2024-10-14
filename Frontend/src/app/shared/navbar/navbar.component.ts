@@ -15,10 +15,10 @@ export class NavbarComponent {
     { label: 'Contact', link: '/contact' }
   ];
 
-  cartLink = '/cart';          // Define the link for the cart page
-  wishlistLink = '/wishlist';  // Define the link for the wishlist page
-  cartItemCount = 0;          // You can dynamically update this count based on the user's cart
-  wishlistItemCount = 0;      // You can dynamically update this count based on the user's wishlist
+  cartLink = '/cart';          
+  // wishlistLink = '/wishlist';  
+  cartItemCount = 0;          
+  // wishlistItemCount = 0;      
   
-  // Optionally, you can load the cart and wishlist counts from a service or API
+
 }

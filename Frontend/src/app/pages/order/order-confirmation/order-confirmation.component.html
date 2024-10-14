@@ -14,13 +14,13 @@
                     <img [src]="item.pieceImage" [alt]="item.pieceName">
                     <div class="item-details">
                         <div class="item-name">{{item.pieceName}}</div>
-                        <div class="item-price">Price: ${{item.piecePrice}}</div>
+                        <div class="item-price">Price: {{item.piecePrice}}dh</div>
                         <div class="item-quantity">Quantity: {{item.quantity}}</div>
                     </div>
                 </div>
             </div>
             <div class="total-price">
-                Total: ${{totalPrice}}
+                Total: {{totalPrice}}dh
             </div>
         </div>
     </div>

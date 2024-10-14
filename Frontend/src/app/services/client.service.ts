@@ -7,7 +7,7 @@ import { Piece } from '../interfaces/Piece';
   providedIn: 'root'
 })
 export class ClientService {
-  private apiUrl = 'http://localhost:8082/api/v1/User/pieces'; // Adjust this URL as needed
+  private apiUrl = 'http://localhost:8082/api/v1/User/pieces';
 
   constructor(private http: HttpClient) { }
 

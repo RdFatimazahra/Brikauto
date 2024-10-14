@@ -29,6 +29,18 @@ import { RegisterComponent } from './auth/register/register.component';
 
 import { CommonModule } from '@angular/common';
 import { OrderConfirmationComponent } from './pages/order/order-confirmation/order-confirmation.component';
+import { ShowOrdersComponent } from './pages/order/show-orders/show-orders.component';
+
+import { NgxPaginationModule } from 'ngx-pagination';
+import { HowItWorksComponent } from './home/how-it-works/how-it-works.component';
+import { TopProductsComponent } from './home/top-products/top-products.component';
+import { FooterComponent } from './home/footer/footer.component';
+import { SliderComponent } from './home/slider/slider.component';
+
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 // Function to retrieve the token
 export function tokenGetter() {
@@ -50,10 +62,20 @@ export function tokenGetter() {
     CartComponent,
     HeroSliderComponent,
     RegisterComponent,
-    OrderConfirmationComponent
+    OrderConfirmationComponent,
+    ShowOrdersComponent,
+    HowItWorksComponent,
+    TopProductsComponent,
+    FooterComponent,
+    SliderComponent
 
   ],
   imports: [
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    NgxPaginationModule,
     BrowserModule,
     RouterModule,
     BrowserAnimationsModule,

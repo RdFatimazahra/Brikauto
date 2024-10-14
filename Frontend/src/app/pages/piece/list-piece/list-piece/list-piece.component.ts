@@ -11,6 +11,7 @@ import { ListPieceService } from 'src/app/services/piece-service.service';
 export class PieceListComponent implements OnInit {
 
   pieceList: Piece[] = [];
+  page: number = 1;  // <-- Add this to track the current page
 
   constructor(private pieceService: ListPieceService, private router: Router) {}
 
@@ -18,11 +19,9 @@ export class PieceListComponent implements OnInit {
     this.loadPieces();
   }
 
-  // Chargement de la liste des pièces
   private loadPieces(): void {
     this.pieceService.getPieceList().subscribe(
       (data: Piece[]) => {
-        console.log('Liste des pièces récupérées :', data);
         this.pieceList = data;
       },
       (error) => {
@@ -31,17 +30,15 @@ export class PieceListComponent implements OnInit {
     );
   }
 
-  // Méthode pour mettre à jour une pièce
   updatePiece(idPiece: number): void {
-    this.router.navigate(['/edit-piece', idPiece]); // Redirection vers la page de mise à jour
+    this.router.navigate(['/edit-piece', idPiece]);
   }
 
-  // Méthode pour supprimer une pièce
   deletePiece(id: number): void {
     if (confirm('Êtes-vous sûr de vouloir supprimer cette pièce ?')) {
       this.pieceService.deletePiece(id).subscribe(
         () => {
-          this.pieceList = this.pieceList.filter(piece => piece.id !== id); // Mise à jour de la liste
+          this.pieceList = this.pieceList.filter(piece => piece.id !== id);
           alert('Pièce supprimée avec succès');
         },
         (error) => {

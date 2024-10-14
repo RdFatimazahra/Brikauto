@@ -1,0 +1,84 @@
+<!-- <div class="orders-table-container">
+    <h2>All Orders</h2>
+    
+    <div *ngIf="loading" class="loading-spinner">
+      Loading orders...
+    </div>
+  
+    <div *ngIf="error" class="error-message">
+      {{ error }}
+    </div>
+  
+    <table *ngIf="!loading && !error && orders.length > 0" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Image</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Total Price</th>
+          <th>Piece Name</th>
+          <th>Piece Price</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{ order.orderId }}</td>
+          <td><img [src]="order.pieceImage" alt="Piece image" class="piece-image"></td>
+          <td>{{ order.orderDate | date:'short' }}</td>
+          <td>{{ order.orderStatus }}</td>
+          <td>{{ order.totalPrice | currency }}</td>
+          <td>{{ order.pieceName }}</td>
+          <td>{{ order.piecePrice | currency }}</td>
+          <td>{{ order.quantity }}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div *ngIf="!loading && !error && orders.length === 0" class="no-orders-message">
+      No orders found.
+    </div>
+  </div> -->
+  <div class="orders-table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Image</th>
+          <th>Nom</th>
+          <th>Date</th>
+          <th>Heure</th>
+          <th>Statut</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders | paginate: { itemsPerPage: 3, currentPage: page }">
+          <td>{{ order.orderId }}</td>
+          <td><img src="{{order.pieceImage}}" style="width:100px; height:auto;"></td>
+          <td>{{ order.pieceName }}</td>
+          <td>{{ order.orderDate | date:'MMM d, yyyy' }}</td>
+          <td>{{ order.orderDate | date:'HH:mm' }}</td>
+         
+          <td>
+            <span class="status-badge" [ngClass]="{
+              'confirmed': order.orderStatus === 'CONFIRMED',
+              'cancelled': order.orderStatus === 'CANCELLED',
+              'rescheduled': order.orderStatus === 'RESCHEDULED'
+            }">
+              {{ order.orderStatus }}
+            </span>
+          </td>
+          <!-- <td class="actions">
+            <button class="action-btn confirm"><i class="fas fa-check"></i></button>
+            <button class="action-btn cancel"><i class="fas fa-times"></i></button>
+            <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+          </td> -->
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Pagination Controls -->
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+  

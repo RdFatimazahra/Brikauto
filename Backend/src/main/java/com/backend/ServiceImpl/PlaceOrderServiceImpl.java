@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PlaceOrderServiceImpl implements PlaceOrderService {
@@ -111,6 +112,26 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
                 .toList();
 
         return orderConfirmationDtos;
+    }
+
+    @Override
+    //Get All Orders :
+    public List<OrderConfirmationDto> getAllOrderConfirmations() {
+        List<Order> orders = orderRepository.findAll();
+        return orders.stream()
+                .flatMap(order -> order.getOrderItems().stream()
+                        .map(item -> new OrderConfirmationDto(
+                                order.getId(),
+                                order.getOrderDate(),
+                                order.getOrderStatus().toString(),
+                                order.getTotalPrice().doubleValue(),
+                                item.getPiece().getId(),
+                                item.getPiece().getNom(),
+                                item.getPiece().getPrix().doubleValue(),
+                                item.getQuantity(),
+                                item.getPiece().getImage()
+                        )))
+                .collect(Collectors.toList());
     }
 
 

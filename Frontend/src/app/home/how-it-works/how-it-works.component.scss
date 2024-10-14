@@ -1,0 +1,153 @@
+// .how-it-works {
+//     background-color: #ffffff;
+//     padding: 60px 0;
+  
+//     .container {
+//       max-width: 1200px;
+//       margin: 0 auto;
+//       padding: 0 15px;
+//     }
+  
+//     .header {
+//       text-align: center;
+//       margin-bottom: 40px;
+  
+//       h2 {
+//         font-size: 36px;
+//         font-weight: bold;
+//         margin-bottom: 15px;
+//       }
+  
+//       p {
+//         font-size: 18px;
+//         color: #666;
+//         max-width: 800px;
+//         margin: 0 auto;
+//       }
+//     }
+  
+//     .steps {
+//       display: flex;
+//       justify-content: space-between;
+//       flex-wrap: wrap;
+//     }
+  
+//     .step {
+//       flex-basis: calc(33.333% - 20px);
+//       text-align: center;
+//       padding: 20px;
+  
+//       @media (max-width: 768px) {
+//         flex-basis: 100%;
+//         margin-bottom: 30px;
+//       }
+  
+//       .icon-container {
+//         background-color: #ffeeee;
+//         width: 80px;
+//         height: 80px;
+//         border-radius: 50%;
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         margin: 0 auto 20px;
+  
+//         i {
+//           font-size: 40px;
+//           color: #2980B9;
+//         }
+//       }
+  
+//       h3 {
+//         font-size: 20px;
+//         font-weight: bold;
+//         margin-bottom: 15px;
+//       }
+  
+//       p {
+//         font-size: 14px;
+//         color: #666;
+//       }
+//     }
+//   }
+  
+//   // Icon fonts (you'll need to replace these with your actual icon font or SVG icons)
+//   @font-face {
+//     font-family: 'auto-parts-icons';
+//     src: url('path-to-your-icon-font/auto-parts-icons.woff') format('woff');
+//     font-weight: normal;
+//     font-style: normal;
+//   }
+  
+//   .icon-tire:before { content: '\e900'; }
+//   .icon-calendar:before { content: '\e901'; }
+//   .icon-truck:before { content: '\e902'; }
+  
+//   [class^="icon-"], [class*=" icon-"] {
+//     font-family: 'auto-parts-icons' !important;
+//    // speak: never;
+//     font-style: normal;
+//     font-weight: normal;
+//     font-variant: normal;
+//     text-transform: none;
+//     line-height: 1;
+//     -webkit-font-smoothing: antialiased;
+//     -moz-osx-font-smoothing: grayscale;
+//   }
+.feature-highlights {
+    background-color: #F8F9FA;
+    padding: 60px 0;
+  
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+  
+    .features {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+  
+    .feature {
+      flex-basis: calc(33.333% - 20px);
+      text-align: center;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+  
+      &:hover {
+        transform: translateY(-5px);
+      }
+  
+      .icon-container {
+        margin-bottom: 20px;
+  
+        i {
+          font-size: 48px;
+          color: #0066cc;
+        }
+      }
+  
+      h3 {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #0066CC;
+      }
+  
+      p {
+        font-size: 14px;
+        color: #666;
+      }
+    }
+  
+    @media (max-width: 768px) {
+      .feature {
+        flex-basis: 100%;
+        margin-bottom: 30px;
+      }
+    }
+  }

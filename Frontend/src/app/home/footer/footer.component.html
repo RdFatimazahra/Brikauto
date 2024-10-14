@@ -1,0 +1,28 @@
+<footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="assets/Nlogo.png" alt="Auto Parts Store Logo" class="logo">
+          <p>Your one-stop shop for quality auto parts and accessories.</p>
+        </div>
+        <div class="footer-links">
+          <div class="link-column" *ngFor="let column of footerLinks">
+            <h3>{{ column.title }}</h3>
+            <ul>
+              <li *ngFor="let link of column.links">
+                <a href="#">{{ link }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="social-links">
+          <a *ngFor="let social of socialLinks" [href]="social.url" target="_blank" rel="noopener noreferrer">
+            <i class="icon-{{ social.icon }}"></i>
+          </a>
+        </div>
+        <p class="copyright">&copy; {{ currentYear }} Auto Parts Store. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>

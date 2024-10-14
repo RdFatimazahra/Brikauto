@@ -1,0 +1,80 @@
+.pieces-table-container {
+    background-color: #e6f3ff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: white;
+  }
+  
+  .table th, .table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .table th {
+    background-color: #e6f3ff;
+    font-weight: 600;
+    color: #495057;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+  }
+  
+  .table tbody tr:hover {
+    background-color: #f8f9fa;
+  }
+
+  /* Style for the "Ajouter une Pièce" button */
+.btn-primary {
+    background-color: #cce5ff;
+    color: #495057; /* Set text color */
+    border: none; /* Optional: remove border */
+  }
+  
+  .btn-primary:hover {
+    background-color: #2199E8; /* Slightly darker on hover */
+    color: #495057; /* Ensure text remains visible */
+  }
+  
+  
+  .actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .btn-success {
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+  }
+  
+  .btn-success:hover, .btn-danger:hover {
+    opacity: 0.85;
+  }
+
+  pagination-controls {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Responsive design */
+  @media screen and (max-width: 768px) {
+    .table {
+      font-size: 0.9rem;
+    }
+    
+    .table th, .table td {
+      padding: 10px;
+    }
+  }
