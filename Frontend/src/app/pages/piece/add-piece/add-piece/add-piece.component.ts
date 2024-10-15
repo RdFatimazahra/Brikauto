@@ -39,7 +39,7 @@ export class AddPieceComponent {
       this.pieceService.createPiece(pieceData).subscribe({
         next: async (response) => {
           console.log('Pièce créée avec succès', response);
-          this.router.navigate(['/list-piece']); // Adjust the redirection path
+          this.router.navigate(['dashboard/list-piece']); // Adjust the redirection path
         },
         error: (error) => {
           console.error('Erreur lors de la création de la pièce', error);

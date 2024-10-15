@@ -1,7 +1,7 @@
 <div class="container">
   <h2>Liste des Pièces</h2>
 
-  <button class="btn btn-primary mb-3" routerLink="add-piece">Ajouter une Pièce</button>
+  <button class="btn btn-primary mb-3" routerLink="/dashboard/add-piece">Ajouter une Pièce</button>
 
   <table class="table">
     <thead>
@@ -15,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let piece of pieceList | paginate: { itemsPerPage: 2, currentPage: page }">
+      <tr *ngFor="let piece of pieceList | paginate: { itemsPerPage: 3, currentPage: page }">
         <td>{{ piece.nom }}</td>
         <td><img src="{{ piece.image }}" style="width:100px; height:auto;"></td>
         <td>{{ piece.reference }}</td>

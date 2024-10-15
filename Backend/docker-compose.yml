@@ -28,7 +28,7 @@
 
 
 
-version: '3.8'  # Optional, can be removed
+version: '3.8'
 
 services:
   psql-db:
@@ -43,9 +43,9 @@ services:
       - '5432:5432'
 
   projet:
-    build:  # This section builds the image using the Dockerfile
-      context: .  # Directory containing the Dockerfile
-      dockerfile: Dockerfile  # Specify the name if it's not named "Dockerfile"
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - '8082:8082'
     environment:
